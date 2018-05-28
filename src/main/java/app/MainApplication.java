@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 
-@ComponentScan({"controller"})
+@ComponentScan({"controller", "service", "dao"})
 @SpringBootApplication
 public class MainApplication {
 
