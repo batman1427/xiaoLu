@@ -4,9 +4,19 @@ public class ErrorLog {
 
     private String sheetName;
 
-    private String row;
+    private int row;
 
     private String description;
+
+    public ErrorLog(){
+
+    }
+
+    public ErrorLog(String sheetName, int row, String description){
+        this.sheetName = sheetName;
+        this.row = row;
+        this.description = description;
+    }
 
     public String getSheetName() {
         return sheetName;
@@ -16,11 +26,11 @@ public class ErrorLog {
         this.sheetName = sheetName;
     }
 
-    public String getRow() {
+    public int getRow() {
         return row;
     }
 
-    public void setRow(String row) {
+    public void setRow(int row) {
         this.row = row;
     }
 
@@ -30,5 +40,9 @@ public class ErrorLog {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String toString(){
+        return this.sheetName+": 第"+row+"行插入失败，错误内容为--"+description+";";
     }
 }

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xiaolu.intermediary">
+    <resultMap id="intermediaryVo" type="model.Intermediary">
+        <result property="intermediaryId" column="intermediary_id"></result>
+        <result property="reportTime" column="report_time"></result>
+        <result property="customerSource" column="customer_source"></result>
+        <result property="reportBuilding" column="report_building"></result>
+        <result property="customerName" column="customer_name"></result>
+        <result property="customerTel" column="customer_tel"></result>
+        <result property="intentionLevel" column="intention_level"></result>
+        <result property="visitTime" column="visit_time"></result>
+        <result property="visitBuilding" column="visit_building"></result>
+        <result property="customerSituation" column="customer_situation"></result>
+        <result property="dealTime" column="deal_time"></result>
+        <result property="dealBuilding" column="deal_building"></result>
+        <result property="dealRoomnum" column="deal_roomnum"></result>
+        <result property="remark" column="remark"></result>
+        <result property="blockFlag" column="block_flag"></result>
+        <result property="createAt" column="create_time"></result>
+    </resultMap>
+
+    <insert id="insert" parameterType="model.Intermediary" useGeneratedKeys="false">
+        INSERT INTO xiaolu_excel.excel_intermediary(intermediary_id, report_time, customer_source, report_building, customer_name, customer_tel, intention_level, visit_time, visit_building, customer_situation, deal_time, deal_building, deal_roomnum, remark, block_flag, create_time)
+        VALUES (#{intermediaryId}, #{reportTime}, #{customerSource}, #{reportBuilding}, #{customerName}, #{customerTel}, #{intentionLevel}, #{visitTime}, #{visitBuilding}, #{customerSituation}, #{dealTime}, #{dealBuilding}, #{dealRoomnum}, #{remark}, #{blockFlag}, #{createAt})
+    </insert>
+
+    <select id="query" parameterType="java.util.Map" resultMap="intermediaryVo">
+        SELECT intermediary_id, report_time, customer_source, report_building, customer_name, customer_tel, intention_level, visit_time, visit_building, customer_situation, deal_time, deal_building, deal_roomnum, remark, block_flag, create_time
+        FROM xiaolu_excel.excel_intermediary
+        WHERE 1 = 1
+        <if test="reportTime != null">
+            AND report_time = #{reportTime}
+        </if>
+        <if test="customerTel != null">
+            AND customer_tel = #{customerTel}
+        </if>
+        <if test="blockFlag != null">
+            AND block_flag = #{blockFlag}
+        </if>
+    </select>
+
+    <update id="update" parameterType="java.util.Map">
+        UPDATE xiaolu_excel.excel_intermediary
+        SET
+        <if test="blockFlag != null">
+            block_flag = #{blockFlag}
+        </if>
+        WHERE customer_tel = #{customerTel} AND report_time = #{reportTime}
+    </update>
+</mapper>
