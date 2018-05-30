@@ -11,7 +11,7 @@ public class TelFilter {
 
     private static ArrayList<String> filterFirst(String tel){
         ArrayList<String> result = new ArrayList<String>();
-        if(tel.length()<16){
+        if(tel.length()<16 && tel.contains("E10")){
            String temp = tel.replace(".", "");
            temp = temp.replace("E10", "0000000000");
            result.add(temp.substring(0,11));

@@ -97,7 +97,7 @@ public class XiaoLuServiceImpl implements XiaoLuService {
                 result = xiaoLuDao.createIntermediary(condition);
                 break;
             case "CALL客表":
-                //result = xiaoLuDao.createCallCustomer(condition);
+                result = xiaoLuDao.createCallCustomer(condition);
                 break;
             case "外拓表":
                 //result = xiaoLuDao.createExtension(condition);
