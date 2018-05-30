@@ -99,6 +99,36 @@ CREATE TABLE IF NOT EXISTS `xiaolu_excel`.`excel_incomingcall` (
 )
   ENGINE = InnoDB;
 
+
+CREATE TABLE IF NOT EXISTS `xiaolu_excel`.`excel_visit` (
+  `visit_id` VARCHAR(40) NOT NULL,
+  `visit_time` VARCHAR(40) NOT NULL,
+  `customer_name` VARCHAR(40),
+  `customer_tel` VARCHAR(40) NOT NULL,
+  `visited_times` VARCHAR(40),
+  `intentional_area` VARCHAR(40),
+  `accept_price` VARCHAR(40),
+  `realty_times` VARCHAR(40),
+  `age` VARCHAR(40),
+  `residential_zone` VARCHAR(40),
+  `work_zone` VARCHAR(40),
+  `occupation` VARCHAR(40),
+  `access_known` VARCHAR(40),
+  `realty_purpose` VARCHAR(40),
+  `realty_type` VARCHAR(40),
+  `concerns` VARCHAR(40),
+  `customer_description` VARCHAR(200),
+  `latest_state` VARCHAR(40),
+  `customer_type` VARCHAR(40),
+  `realty_consultant` VARCHAR(40),
+  `deal_time` VARCHAR(40),
+  `deal_roomnum` VARCHAR(40),
+  `block_flag`   TINYINT(1)  NOT NULL,
+  `create_time`  DATETIME    NOT NULL,
+  PRIMARY KEY (`visit_id`)
+)
+  ENGINE = InnoDB;
+
 SET SQL_MODE = @OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS = @OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS = @OLD_UNIQUE_CHECKS;

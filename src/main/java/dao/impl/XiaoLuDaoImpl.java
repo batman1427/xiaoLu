@@ -3,14 +3,15 @@ package dao.impl;
 import auxiliary.*;
 import dao.BaseDao;
 import dao.XiaoLuDao;
-import model.CallCustomer;
-import model.Extension;
-import model.IncomingCall;
-import model.Intermediary;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
+import model.*;
+import org.apache.poi.hssf.usermodel.HSSFFormulaEvaluator;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFFormulaEvaluator;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,7 @@ public class XiaoLuDaoImpl extends BaseDao implements XiaoLuDao{
         List<ErrorLog> errorLogList = new ArrayList<ErrorLog>();
         Sheet sheet = (Sheet) condition.get("sheet");
         for(int i=2;i<sheet.getPhysicalNumberOfRows();i++){
+            System.out.println("正在处理表"+sheet.getSheetName()+"的第"+(i-1)+"条记录;");
             if(sheet.getRow(i) != null && sheet.getRow(i).getFirstCellNum()==0 && sheet.getRow(i).getCell(0).toString().trim().length() > 0){
                 try{
                     Row row = sheet.getRow(i);
@@ -33,7 +35,6 @@ public class XiaoLuDaoImpl extends BaseDao implements XiaoLuDao{
                     String tempTel = row.getCell(5).toString().trim();
                     reportTime = TimeFilter.getTime(reportTime);
                     ArrayList<String> customerTel = TelFilter.getTel(tempTel);
-
                     String customerSource = row.getCell(2)==null ? "" : row.getCell(2).toString().trim();
                     String reportBuilding = row.getCell(3)==null ? "" : row.getCell(3).toString().trim();
                     String customerName = row.getCell(4)==null ? "" : row.getCell(4).toString().trim();
@@ -116,6 +117,7 @@ public class XiaoLuDaoImpl extends BaseDao implements XiaoLuDao{
         List<ErrorLog> errorLogList = new ArrayList<ErrorLog>();
         Sheet sheet = (Sheet) condition.get("sheet");
         for(int i=2;i<sheet.getPhysicalNumberOfRows();i++){
+            System.out.println("正在处理表"+sheet.getSheetName()+"的第"+(i-1)+"条记录;");
             if(sheet.getRow(i) != null && sheet.getRow(i).getFirstCellNum()==0 && sheet.getRow(i).getCell(0).toString().trim().length() > 0){
                 try{
                     Row row = sheet.getRow(i);
@@ -123,7 +125,6 @@ public class XiaoLuDaoImpl extends BaseDao implements XiaoLuDao{
                     String tempTel = row.getCell(5).toString().trim();
                     callTime = TimeFilter.getTime(callTime);
                     ArrayList<String> customerTel = TelFilter.getTel(tempTel);
-
                     String datasourceArea = row.getCell(1)==null ? "" : row.getCell(1).toString().trim();
                     String datasourceBuilding = row.getCell(2)==null ? "" : row.getCell(2).toString().trim();
                     String datasourceType = row.getCell(3)==null ? "" : row.getCell(3).toString().trim();
@@ -210,6 +211,7 @@ public class XiaoLuDaoImpl extends BaseDao implements XiaoLuDao{
         List<ErrorLog> errorLogList = new ArrayList<ErrorLog>();
         Sheet sheet = (Sheet) condition.get("sheet");
         for(int i=2;i<sheet.getPhysicalNumberOfRows();i++){
+            System.out.println("正在处理表"+sheet.getSheetName()+"的第"+(i-1)+"条记录;");
             if(sheet.getRow(i) != null && sheet.getRow(i).getFirstCellNum()==0 && sheet.getRow(i).getCell(0).toString().trim().length() > 0){
                 try{
                     Row row = sheet.getRow(i);
@@ -217,7 +219,6 @@ public class XiaoLuDaoImpl extends BaseDao implements XiaoLuDao{
                     String tempTel = row.getCell(4).toString().trim();
                     extensionTime = TimeFilter.getTime(extensionTime);
                     ArrayList<String> customerTel = TelFilter.getTel(tempTel);
-
                     String extensionLocation = row.getCell(2)==null ? "" : row.getCell(2).toString().trim();
                     String customerName = row.getCell(3)==null ? "" : row.getCell(3).toString().trim();
                     String realtyConsultant = row.getCell(5)==null ? "" : row.getCell(5).toString().trim();
@@ -291,12 +292,14 @@ public class XiaoLuDaoImpl extends BaseDao implements XiaoLuDao{
         return result;
     }
 
+    @Transactional
     @Override
     public ResultData createIncomingCall(Map<String, Object> condition) {
         ResultData result = new ResultData();
         List<ErrorLog> errorLogList = new ArrayList<ErrorLog>();
         Sheet sheet = (Sheet) condition.get("sheet");
         for(int i=2;i<sheet.getPhysicalNumberOfRows();i++){
+            System.out.println("正在处理表"+sheet.getSheetName()+"的第"+(i-1)+"条记录;");
             if(sheet.getRow(i) != null && sheet.getRow(i).getFirstCellNum()==0 && sheet.getRow(i).getCell(0).toString().trim().length() > 0){
                 try{
                     Row row = sheet.getRow(i);
@@ -304,7 +307,6 @@ public class XiaoLuDaoImpl extends BaseDao implements XiaoLuDao{
                     String tempTel = row.getCell(3).toString().trim();
                     callTime = TimeFilter.getTime(callTime);
                     ArrayList<String> customerTel = TelFilter.getTel(tempTel);
-
                     String customerName = row.getCell(2)==null ? "" : row.getCell(2).toString().trim();
                     String realtyPurpose = row.getCell(4)==null ? "" : row.getCell(4).toString().trim();
                     String demandArea = row.getCell(5)==null ? "" : row.getCell(5).toString().trim();
@@ -383,14 +385,131 @@ public class XiaoLuDaoImpl extends BaseDao implements XiaoLuDao{
         return result;
     }
 
+    @Transactional
     @Override
     public ResultData createVisit(Map<String, Object> condition) {
-        return null;
+        ResultData result = new ResultData();
+        List<ErrorLog> errorLogList = new ArrayList<ErrorLog>();
+        Sheet sheet = (Sheet) condition.get("sheet");
+        FormulaEvaluator formulaEvaluator = null;
+        Workbook workbook = (Workbook) condition.get("workbook");
+        MultipartFile file = (MultipartFile) condition.get("file");
+        if(file.getOriginalFilename().endsWith("xlsx")){
+            formulaEvaluator = new XSSFFormulaEvaluator((XSSFWorkbook) workbook);
+        }else{
+            formulaEvaluator = new HSSFFormulaEvaluator((HSSFWorkbook) workbook);
+        }
+        for(int i=1;i<sheet.getPhysicalNumberOfRows();i++){
+            System.out.println("正在处理表"+sheet.getSheetName()+"的第"+i+"条记录;");
+            if(sheet.getRow(i) != null && sheet.getRow(i).getFirstCellNum()==0 && sheet.getRow(i).getCell(0).toString().trim().length() > 0){
+                try{
+                    Row row = sheet.getRow(i);
+                    String visitTime = row.getCell(0).toString().trim();
+                    String tempTel = row.getCell(2).toString().trim();
+                    visitTime = TimeFilter.getTime(visitTime);
+                    ArrayList<String> customerTel = TelFilter.getTel(tempTel);
+                    String customerName = row.getCell(1)==null ? "" : row.getCell(1).toString().trim();
+                    String visitedTimes = row.getCell(3)==null ? "" : row.getCell(3).toString().trim();
+                    String intentionalArea = row.getCell(4)==null ? "" : row.getCell(4).toString().trim();
+                    String acceptPrice = "";
+                    if(row.getCell(5)!=null && row.getCell(5).getCellType() == Cell.CELL_TYPE_FORMULA){
+                        acceptPrice = getCellValueFormula(row.getCell(5), formulaEvaluator);
+                    }else {
+                        acceptPrice = row.getCell(5) == null ? "" : row.getCell(5).toString().trim();
+                    }
+                    String realtyTimes = row.getCell(6)==null ? "" : row.getCell(6).toString().trim();
+                    String age = row.getCell(7)==null ? "" : row.getCell(7).toString().trim();
+                    String residentialZone = row.getCell(8)==null ? "" : row.getCell(8).toString().trim();
+                    String workZone = row.getCell(9)==null ? "" : row.getCell(9).toString().trim();
+                    String occupation = row.getCell(10)==null ? "" : row.getCell(10).toString().trim();
+                    String accessKnown = row.getCell(11)==null ? "" : row.getCell(11).toString().trim();
+                    String realtyPurpose = row.getCell(12)==null ? "" : row.getCell(12).toString().trim();
+                    String realtyType = row.getCell(13)==null ? "" : row.getCell(13).toString().trim();
+                    String concerns = row.getCell(14)==null ? "" : row.getCell(14).toString().trim();
+                    String customerDescription = row.getCell(15)==null ? "" : row.getCell(15).toString().trim();
+                    String latestState = row.getCell(16)==null ? "" : row.getCell(16).toString().trim();
+                    String customerType = row.getCell(17)==null ? "" : row.getCell(17).toString().trim();
+                    String realtyConsultant = row.getCell(18)==null ? "" : row.getCell(18).toString().trim();
+                    String dealTime = row.getCell(19)==null ? "" : row.getCell(19).toString().trim();
+                    String dealRoomnum = row.getCell(20)==null ? "" : row.getCell(20).toString().trim();
+                    if(customerTel.size() == 0){
+                        ErrorLog errorLog = new ErrorLog(sheet.getSheetName(), i, "客户电话为空或者无法识别");
+                        errorLogList.add(errorLog);
+                        continue;
+                    }
+                    for(int k=0;k<customerTel.size();k++){
+                        condition.clear();
+                        condition.put("blockFlag", false);
+                        Visit visit = new Visit(visitTime, customerName, customerTel.get(k), visitedTimes, intentionalArea, acceptPrice, realtyTimes, age, residentialZone, workZone, occupation, accessKnown, realtyPurpose, realtyType, concerns, customerDescription, latestState, customerType, realtyConsultant, dealTime, dealRoomnum);
+                        visit.setVisitId(IDGenerator.generate("VIT"));
+                        if(visitTime.equals("false")){
+                            ErrorLog errorLog = new ErrorLog(sheet.getSheetName(), i, "来访时间为空或者无法识别");
+                            errorLogList.add(errorLog);
+                            continue;
+                        }
+                        condition.put("visitTime", visitTime);
+                        condition.put("customerTel", customerTel.get(k));
+                        try {
+                            List<Visit> list = sqlSession.selectList("xiaolu.visit.query", condition);
+                            if (list.isEmpty()) {
+                                try {
+                                    sqlSession.insert("xiaolu.visit.insert", visit);
+                                } catch (Exception e) {
+                                    ErrorLog errorLog = new ErrorLog(sheet.getSheetName(), i, "数据库插入出错："+e.getMessage());
+                                    errorLogList.add(errorLog);
+                                    continue;
+                                }
+                            }else{
+                                try {
+                                    condition.remove("blockFlag");
+                                    condition.put("blockFlag", true);
+                                    sqlSession.update("xiaolu.visit.update", condition);
+                                } catch (Exception e) {
+                                    ErrorLog errorLog = new ErrorLog(sheet.getSheetName(), i, "数据库更新出错："+e.getMessage());
+                                    errorLogList.add(errorLog);
+                                    continue;
+                                }
+                                try {
+                                    sqlSession.insert("xiaolu.visit.insert", visit);
+                                } catch (Exception e) {
+                                    ErrorLog errorLog = new ErrorLog(sheet.getSheetName(), i, "数据库插入出错："+e.getMessage());
+                                    errorLogList.add(errorLog);
+                                    continue;
+                                }
+                            }
+                        } catch (Exception e) {
+                            ErrorLog errorLog = new ErrorLog(sheet.getSheetName(), i, "数据库查询出错："+e.getMessage());
+                            errorLogList.add(errorLog);
+                            continue;
+                        }
+                    }
+                }catch(Exception e){
+                    ErrorLog errorLog = new ErrorLog(sheet.getSheetName(), i, "存在非法单元格："+e.getMessage());
+                    errorLogList.add(errorLog);
+                    continue;
+                }
+            }else{
+                break;
+            }
+        }
+        result.setData(errorLogList);
+        return result;
     }
+
+    public static String getCellValueFormula(Cell cell, FormulaEvaluator formulaEvaluator) {
+        return String.valueOf(formulaEvaluator.evaluate(cell).getNumberValue());
+    }
+
 
     @Override
     public ResultData handleUnknown(Map<String, Object> condition) {
-        return null;
+        ResultData result = new ResultData();
+        List<ErrorLog> errorLogList = new ArrayList<ErrorLog>();
+        Sheet sheet = (Sheet) condition.get("sheet");
+        ErrorLog errorLog = new ErrorLog(sheet.getSheetName(), -1, "不能识别的表格类型");
+        errorLogList.add(errorLog);
+        result.setData(errorLogList);
+        return result;
     }
 
 }

@@ -10,6 +10,7 @@ public class TelFilter {
     }
 
     private static ArrayList<String> filterFirst(String tel){
+        tel = tel.replace("-", "");
         ArrayList<String> result = new ArrayList<String>();
         if(tel.length()<16 && tel.contains("E10")){
            String temp = tel.replace(".", "");

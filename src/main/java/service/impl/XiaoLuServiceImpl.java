@@ -18,10 +18,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class XiaoLuServiceImpl implements XiaoLuService {
@@ -47,15 +44,13 @@ public class XiaoLuServiceImpl implements XiaoLuService {
             result.setResponseCode(ResponseCode.RESPONSE_ERROR);
             result.setDescription(e.getMessage());
         }
-
-        //condition.put("logPath", this.getClass().getClassLoader().getResource("").getPath()+"records/"+time+"/");
         try {
             Workbook workbook = WorkbookFactory.create(new File(path));
             int countSheet = workbook.getNumberOfSheets();
             List<ErrorLog> errorLogList = new ArrayList<ErrorLog>();
             for(int i=0;i<countSheet;i++){
                 Sheet sheet = workbook.getSheetAt(i);
-                ResultData response = this.save(condition, sheet);
+                ResultData response = this.save(file, sheet, workbook);
                 if(response.getResponseCode() == ResponseCode.RESPONSE_ERROR){
                     return response;
                 }else{
@@ -88,28 +83,31 @@ public class XiaoLuServiceImpl implements XiaoLuService {
         return result;
     }
 
-    public ResultData save(Map<String, Object> condition, Sheet sheet){
+    public ResultData save(MultipartFile file, Sheet sheet, Workbook workbook){
+        Map<String, Object> condition = new HashMap<String, Object>();
         ResultData result = new ResultData();
         condition.put("sheet", sheet);
+        condition.put("file", file);
+        condition.put("workbook", workbook);
         String sheetName = sheet.getSheetName();
         switch(sheetName){
             case "中介带访":
-                //result = xiaoLuDao.createIntermediary(condition);
+                result = xiaoLuDao.createIntermediary(condition);
                 break;
             case "CALL客表":
-                //result = xiaoLuDao.createCallCustomer(condition);
+                result = xiaoLuDao.createCallCustomer(condition);
                 break;
             case "外拓表":
-                //result = xiaoLuDao.createExtension(condition);
+                result = xiaoLuDao.createExtension(condition);
                 break;
             case "来电":
                 result = xiaoLuDao.createIncomingCall(condition);
                 break;
             case "来访":
-                //result = xiaoLuDao.createVisit(condition);
+                result = xiaoLuDao.createVisit(condition);
                 break;
             default:
-                //result = xiaoLuDao.handleUnknown(condition);
+                result = xiaoLuDao.handleUnknown(condition);
 
         }
         return result;
