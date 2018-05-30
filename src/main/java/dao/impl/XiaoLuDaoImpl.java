@@ -4,6 +4,7 @@ import auxiliary.*;
 import dao.BaseDao;
 import dao.XiaoLuDao;
 import model.CallCustomer;
+import model.Extension;
 import model.Intermediary;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -107,6 +108,7 @@ public class XiaoLuDaoImpl extends BaseDao implements XiaoLuDao{
         return result;
     }
 
+    @Transactional
     @Override
     public ResultData createCallCustomer(Map<String, Object> condition) {
         ResultData result = new ResultData();
@@ -120,6 +122,7 @@ public class XiaoLuDaoImpl extends BaseDao implements XiaoLuDao{
                     String tempTel = row.getCell(5).toString().trim();
                     callTime = TimeFilter.getTime(callTime);
                     ArrayList<String> customerTel = TelFilter.getTel(tempTel);
+
                     String datasourceArea = row.getCell(1)==null ? "" : row.getCell(1).toString().trim();
                     String datasourceBuilding = row.getCell(2)==null ? "" : row.getCell(2).toString().trim();
                     String datasourceType = row.getCell(3)==null ? "" : row.getCell(3).toString().trim();
@@ -199,9 +202,92 @@ public class XiaoLuDaoImpl extends BaseDao implements XiaoLuDao{
         return result;
     }
 
+    @Transactional
     @Override
     public ResultData createExtension(Map<String, Object> condition) {
-        return null;
+        ResultData result = new ResultData();
+        List<ErrorLog> errorLogList = new ArrayList<ErrorLog>();
+        Sheet sheet = (Sheet) condition.get("sheet");
+        for(int i=2;i<sheet.getPhysicalNumberOfRows();i++){
+            if(sheet.getRow(i) != null && sheet.getRow(i).getFirstCellNum()==0 && sheet.getRow(i).getCell(0).toString().trim().length() > 0){
+                try{
+                    Row row = sheet.getRow(i);
+                    String extensionTime = row.getCell(1).toString().trim();
+                    String tempTel = row.getCell(4).toString().trim();
+                    extensionTime = TimeFilter.getTime(extensionTime);
+                    ArrayList<String> customerTel = TelFilter.getTel(tempTel);
+
+                    String extensionLocation = row.getCell(2)==null ? "" : row.getCell(2).toString().trim();
+                    String customerName = row.getCell(3)==null ? "" : row.getCell(3).toString().trim();
+                    String realtyConsultant = row.getCell(5)==null ? "" : row.getCell(5).toString().trim();
+                    String visitTime = row.getCell(6)==null ? "" : row.getCell(6).toString().trim();
+                    String customerSituation = row.getCell(7)==null ? "" : row.getCell(7).toString().trim();
+                    String dealTime = row.getCell(8)==null ? "" : row.getCell(8).toString().trim();
+                    String dealBuilding = row.getCell(9)==null ? "" : row.getCell(9).toString().trim();
+                    String dealRoomnum = row.getCell(10)==null ? "" : row.getCell(10).toString().trim();
+                    String remark = row.getCell(11)==null ? "" : row.getCell(11).toString().trim();
+                    if(customerTel.size() == 0){
+                        ErrorLog errorLog = new ErrorLog(sheet.getSheetName(), i-1, "客户电话为空或者无法识别");
+                        errorLogList.add(errorLog);
+                        continue;
+                    }
+                    for(int k=0;k<customerTel.size();k++){
+                        condition.clear();
+                        condition.put("blockFlag", false);
+                        Extension extension = new Extension(extensionTime, extensionLocation, customerName, customerTel.get(k), realtyConsultant, visitTime, customerSituation, dealTime, dealBuilding, dealRoomnum, remark);
+                        extension.setExtensionId(IDGenerator.generate("EXT"));
+                        if(extensionTime.equals("false")){
+                            ErrorLog errorLog = new ErrorLog(sheet.getSheetName(), i-1, "外拓时间为空或者无法识别");
+                            errorLogList.add(errorLog);
+                            continue;
+                        }
+                        condition.put("extensionTime", extensionTime);
+                        condition.put("customerTel", customerTel.get(k));
+                        try {
+                            List<Extension> list = sqlSession.selectList("xiaolu.extension.query", condition);
+                            if (list.isEmpty()) {
+                                try {
+                                    sqlSession.insert("xiaolu.extension.insert", extension);
+                                } catch (Exception e) {
+                                    ErrorLog errorLog = new ErrorLog(sheet.getSheetName(), i-1, "数据库插入出错："+e.getMessage());
+                                    errorLogList.add(errorLog);
+                                    continue;
+                                }
+                            }else{
+                                try {
+                                    condition.remove("blockFlag");
+                                    condition.put("blockFlag", true);
+                                    sqlSession.update("xiaolu.extension.update", condition);
+                                } catch (Exception e) {
+                                    ErrorLog errorLog = new ErrorLog(sheet.getSheetName(), i-1, "数据库更新出错："+e.getMessage());
+                                    errorLogList.add(errorLog);
+                                    continue;
+                                }
+                                try {
+                                    sqlSession.insert("xiaolu.extension.insert", extension);
+                                } catch (Exception e) {
+                                    ErrorLog errorLog = new ErrorLog(sheet.getSheetName(), i-1, "数据库插入出错："+e.getMessage());
+                                    errorLogList.add(errorLog);
+                                    continue;
+                                }
+                            }
+                        } catch (Exception e) {
+                            ErrorLog errorLog = new ErrorLog(sheet.getSheetName(), i-1, "数据库查询出错："+e.getMessage());
+                            errorLogList.add(errorLog);
+                            continue;
+                        }
+                    }
+                }catch(Exception e){
+                    ErrorLog errorLog = new ErrorLog(sheet.getSheetName(), i-1, "存在非法单元格："+e.getMessage());
+                    errorLogList.add(errorLog);
+                    continue;
+                }
+            }else{
+                break;
+            }
+        }
+        result.setData(errorLogList);
+        return result;
     }
 
     @Override

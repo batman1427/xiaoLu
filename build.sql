@@ -55,6 +55,25 @@ CREATE TABLE IF NOT EXISTS `xiaolu_excel`.`excel_callcustomer` (
   ENGINE = InnoDB;
 
 
+CREATE TABLE IF NOT EXISTS `xiaolu_excel`.`excel_extension` (
+  `extension_id` VARCHAR(40) NOT NULL,
+  `extension_time` VARCHAR(40) NOT NULL,
+  `extension_location` VARCHAR(40),
+  `customer_name` VARCHAR(40),
+  `customer_tel` VARCHAR(40) NOT NULL,
+  `realty_consultant` VARCHAR(40),
+  `visit_time` VARCHAR(40),
+  `customer_situation` VARCHAR(40),
+  `deal_time` VARCHAR(40),
+  `deal_building` VARCHAR(40),
+  `deal_roomnum` VARCHAR(40),
+  `remark` VARCHAR(100),
+  `block_flag`   TINYINT(1)  NOT NULL,
+  `create_time`  DATETIME    NOT NULL,
+  PRIMARY KEY (`extension_id`)
+)
+  ENGINE = InnoDB;
+
 SET SQL_MODE = @OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS = @OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS = @OLD_UNIQUE_CHECKS;
