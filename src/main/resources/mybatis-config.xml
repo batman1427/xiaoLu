@@ -7,5 +7,6 @@
         <mapper resource="mapper/intermediary.xml" />
         <mapper resource="mapper/callcustomer.xml" />
         <mapper resource="mapper/extension.xml" />
+        <mapper resource="mapper/incomingcall.xml" />
     </mappers>
 </configuration>

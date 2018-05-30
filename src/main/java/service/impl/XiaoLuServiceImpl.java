@@ -100,10 +100,10 @@ public class XiaoLuServiceImpl implements XiaoLuService {
                 //result = xiaoLuDao.createCallCustomer(condition);
                 break;
             case "外拓表":
-                result = xiaoLuDao.createExtension(condition);
+                //result = xiaoLuDao.createExtension(condition);
                 break;
             case "来电":
-                //result = xiaoLuDao.createIncomingCall(condition);
+                result = xiaoLuDao.createIncomingCall(condition);
                 break;
             case "来访":
                 //result = xiaoLuDao.createVisit(condition);

@@ -5,6 +5,7 @@ import dao.BaseDao;
 import dao.XiaoLuDao;
 import model.CallCustomer;
 import model.Extension;
+import model.IncomingCall;
 import model.Intermediary;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -292,7 +293,94 @@ public class XiaoLuDaoImpl extends BaseDao implements XiaoLuDao{
 
     @Override
     public ResultData createIncomingCall(Map<String, Object> condition) {
-        return null;
+        ResultData result = new ResultData();
+        List<ErrorLog> errorLogList = new ArrayList<ErrorLog>();
+        Sheet sheet = (Sheet) condition.get("sheet");
+        for(int i=2;i<sheet.getPhysicalNumberOfRows();i++){
+            if(sheet.getRow(i) != null && sheet.getRow(i).getFirstCellNum()==0 && sheet.getRow(i).getCell(0).toString().trim().length() > 0){
+                try{
+                    Row row = sheet.getRow(i);
+                    String callTime = row.getCell(1).toString().trim();
+                    String tempTel = row.getCell(3).toString().trim();
+                    callTime = TimeFilter.getTime(callTime);
+                    ArrayList<String> customerTel = TelFilter.getTel(tempTel);
+
+                    String customerName = row.getCell(2)==null ? "" : row.getCell(2).toString().trim();
+                    String realtyPurpose = row.getCell(4)==null ? "" : row.getCell(4).toString().trim();
+                    String demandArea = row.getCell(5)==null ? "" : row.getCell(5).toString().trim();
+                    String houseType = row.getCell(6)==null ? "" : row.getCell(6).toString().trim();
+                    String residentialZone = row.getCell(7)==null ? "" : row.getCell(7).toString().trim();
+                    String acceptPrice = row.getCell(8)==null ? "" : row.getCell(8).toString().trim();
+                    String accessKnown = row.getCell(9)==null ? "" : row.getCell(9).toString().trim();
+                    String consultContent = row.getCell(10)==null ? "" : row.getCell(10).toString().trim();
+                    String visitTime = row.getCell(11)==null ? "" : row.getCell(11).toString().trim();
+                    String customerSituation = row.getCell(12)==null ? "" : row.getCell(12).toString().trim();
+                    String dealTime = row.getCell(13)==null ? "" : row.getCell(13).toString().trim();
+                    String dealBuilding = row.getCell(14)==null ? "" : row.getCell(14).toString().trim();
+                    String dealRoomnum = row.getCell(15)==null ? "" : row.getCell(15).toString().trim();
+                    String salesman = row.getCell(16)==null ? "" : row.getCell(16).toString().trim();
+                    if(customerTel.size() == 0){
+                        ErrorLog errorLog = new ErrorLog(sheet.getSheetName(), i-1, "客户电话为空或者无法识别");
+                        errorLogList.add(errorLog);
+                        continue;
+                    }
+                    for(int k=0;k<customerTel.size();k++){
+                        condition.clear();
+                        condition.put("blockFlag", false);
+                        IncomingCall incomingCall = new IncomingCall(callTime, customerName, customerTel.get(k), realtyPurpose, demandArea, houseType, residentialZone, acceptPrice, accessKnown, consultContent, visitTime, customerSituation, dealTime, dealBuilding, dealRoomnum, salesman);
+                        incomingCall.setIncomingCallId(IDGenerator.generate("ICC"));
+                        if(callTime.equals("false")){
+                            ErrorLog errorLog = new ErrorLog(sheet.getSheetName(), i-1, "来电时间为空或者无法识别");
+                            errorLogList.add(errorLog);
+                            continue;
+                        }
+                        condition.put("callTime", callTime);
+                        condition.put("customerTel", customerTel.get(k));
+                        try {
+                            List<IncomingCall> list = sqlSession.selectList("xiaolu.incomingcall.query", condition);
+                            if (list.isEmpty()) {
+                                try {
+                                    sqlSession.insert("xiaolu.incomingcall.insert", incomingCall);
+                                } catch (Exception e) {
+                                    ErrorLog errorLog = new ErrorLog(sheet.getSheetName(), i-1, "数据库插入出错："+e.getMessage());
+                                    errorLogList.add(errorLog);
+                                    continue;
+                                }
+                            }else{
+                                try {
+                                    condition.remove("blockFlag");
+                                    condition.put("blockFlag", true);
+                                    sqlSession.update("xiaolu.incomingcall.update", condition);
+                                } catch (Exception e) {
+                                    ErrorLog errorLog = new ErrorLog(sheet.getSheetName(), i-1, "数据库更新出错："+e.getMessage());
+                                    errorLogList.add(errorLog);
+                                    continue;
+                                }
+                                try {
+                                    sqlSession.insert("xiaolu.incomingcall.insert", incomingCall);
+                                } catch (Exception e) {
+                                    ErrorLog errorLog = new ErrorLog(sheet.getSheetName(), i-1, "数据库插入出错："+e.getMessage());
+                                    errorLogList.add(errorLog);
+                                    continue;
+                                }
+                            }
+                        } catch (Exception e) {
+                            ErrorLog errorLog = new ErrorLog(sheet.getSheetName(), i-1, "数据库查询出错："+e.getMessage());
+                            errorLogList.add(errorLog);
+                            continue;
+                        }
+                    }
+                }catch(Exception e){
+                    ErrorLog errorLog = new ErrorLog(sheet.getSheetName(), i-1, "存在非法单元格："+e.getMessage());
+                    errorLogList.add(errorLog);
+                    continue;
+                }
+            }else{
+                break;
+            }
+        }
+        result.setData(errorLogList);
+        return result;
     }
 
     @Override
