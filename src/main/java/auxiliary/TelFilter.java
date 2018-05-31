@@ -12,6 +12,19 @@ public class TelFilter {
     private static ArrayList<String> filterFirst(String tel){
         tel = tel.replace("-", "");
         ArrayList<String> result = new ArrayList<String>();
+        if(tel.length() == 11){
+            boolean temp = true;
+            for(int i=0;i<11;i++){
+                if(tel.charAt(i)>=48 && tel.charAt(i)<=57){
+                }else{
+                    temp = false;
+                }
+            }
+            if(temp){
+                result.add(tel);
+                return result;
+            }
+        }
         if(tel.length()<16 && tel.contains("E10")){
            String temp = tel.replace(".", "");
            temp = temp.replace("E10", "0000000000");

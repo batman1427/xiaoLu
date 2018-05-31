@@ -16,5 +16,7 @@ public interface XiaoLuDao {
 
     ResultData createVisit(Map<String, Object> condition);
 
+    ResultData createDeal(Map<String, Object> condition);
+
     ResultData handleUnknown(Map<String, Object> condition);
 }

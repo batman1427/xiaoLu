@@ -61,6 +61,7 @@ public class XiaoLuServiceImpl implements XiaoLuService {
                     result.setData(errorLogList);
                 }
             }
+            System.out.println("所有表格处理完成。");
         } catch (IOException e) {
             result.setResponseCode(ResponseCode.RESPONSE_ERROR);
             result.setDescription(e.getMessage());
@@ -105,6 +106,9 @@ public class XiaoLuServiceImpl implements XiaoLuService {
                 break;
             case "来访":
                 result = xiaoLuDao.createVisit(condition);
+                break;
+            case "成交":
+                result = xiaoLuDao.createDeal(condition);
                 break;
             default:
                 result = xiaoLuDao.handleUnknown(condition);

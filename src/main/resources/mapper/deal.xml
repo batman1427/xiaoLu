@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xiaolu.deal">
+    <resultMap id="dealVo" type="model.Deal">
+        <result property="dealId" column="deal_id"></result>
+        <result property="subscriptionTime" column="subscription_time"></result>
+        <result property="recognitionTime" column="recognition_time"></result>
+        <result property="propertyType" column="property_type"></result>
+        <result property="dealSection" column="deal_section"></result>
+        <result property="decoration" column="decoration"></result>
+        <result property="buildingId" column="building_id"></result>
+        <result property="roomNum" column="room_num"></result>
+        <result property="customerName" column="customer_name"></result>
+        <result property="wechatId" column="wechat_id"></result>
+        <result property="customerTel" column="customer_tel"></result>
+        <result property="predictedArea" column="predicted_area"></result>
+        <result property="subscriptionUnitPrice" column="subscription_unit_price"></result>
+        <result property="subscriptionTotalPrice" column="subscription_total_price"></result>
+        <result property="discountDetail" column="discount_detail"></result>
+        <result property="fiveToFifteen" column="five_to_fifteen"></result>
+        <result property="fifteenAfterDiscount" column="fifteen_after_discount"></result>
+        <result property="openingQuotationDiscount" column="opening_quotation_discount"></result>
+        <result property="discountOfContractOntime" column="discount_of_contract_ontime"></result>
+        <result property="actualDealUnitPrice" column="actual_deal_unit_price"></result>
+        <result property="dealTotalPriceInput" column="deal_total_price_input"></result>
+        <result property="dealTotalPriceCheck" column="deal_total_price_check"></result>
+        <result property="amountOfPaymentFirst" column="amount_of_payment_first"></result>
+        <result property="dateOfPaymentFirst" column="date_of_payment_first"></result>
+        <result property="amountOfPaymentSecond" column="amount_of_payment_second"></result>
+        <result property="dateOfPaymentSecond" column="date_of_payment_second"></result>
+        <result property="amountOfPaymentThird" column="amount_of_payment_third"></result>
+        <result property="dateOfPaymentThird" column="date_of_payment_third"></result>
+        <result property="arrangeContractDate" column="arrange_contract_date"></result>
+        <result property="subscriptionWithoutContract" column="subscription_without_contract"></result>
+        <result property="actualContractDate" column="actual_contract_date"></result>
+        <result property="loanAmount" column="loan_amount"></result>
+        <result property="transactLoanDate" column="transact_loan_date"></result>
+        <result property="loanBank" column="loan_bank"></result>
+        <result property="paymentMethod" column="payment_method"></result>
+        <result property="paymentRate" column="payment_rate"></result>
+        <result property="accumulativePayment" column="accumulative_payment"></result>
+        <result property="unPayment" column="un_payment"></result>
+        <result property="completePaymentDate" column="complete_payment_date"></result>
+        <result property="mortgageSchedule" column="mortgage_schedule"></result>
+        <result property="salesCompany" column="sales_company"></result>
+        <result property="staffPercentage" column="staff_percentage"></result>
+        <result property="realtyConsultantSalary" column="realty_consultant_salary"></result>
+        <result property="realtyConsultant" column="realty_consultant"></result>
+        <result property="abutmentPerson" column="abutment_person"></result>
+        <result property="agreementAuthenticationDate" column="agreement_authentication_date"></result>
+        <result property="address" column="address"></result>
+        <result property="cardId" column="card_id"></result>
+        <result property="age" column="age"></result>
+        <result property="residentialZone" column="residential_zone"></result>
+        <result property="workZone" column="work_zone"></result>
+        <result property="occupation" column="occupation"></result>
+        <result property="accessKnown" column="access_known"></result>
+        <result property="referee" column="referee"></result>
+        <result property="refereeTel" column="referee_tel"></result>
+        <result property="realtyPurpose" column="realty_purpose"></result>
+        <result property="realtyTimes" column="realty_times"></result>
+        <result property="salarySettlementSubmitTime" column="salary_settlement_submit_time"></result>
+        <result property="salaryGrantTime" column="salary_grant_time"></result>
+        <result property="salarySettlementRate" column="salary_settlement_rate"></result>
+        <result property="settleSalaryRate" column="settle_salary_rate"></result>
+        <result property="settleSalaryMoney" column="settle_salary_money"></result>
+        <result property="salarySettlementSubmitTimeSecond" column="salary_settlement_submit_time_second"></result>
+        <result property="salaryGrantTimeSecond" column="salary_grant_time_second"></result>
+        <result property="salarySettlementRateSecond" column="salary_settlement_rate_second"></result>
+        <result property="deposit" column="deposit"></result>
+        <result property="predictedDeliverTime" column="predicted_deliver_time"></result>
+        <result property="signPurchaseContract" column="sign_purchase_contract"></result>
+        <result property="signPropertyContract" column="sign_property_contract"></result>
+        <result property="intermediaryMoney" column="intermediary_money"></result>
+        <result property="oldToNew" column="old_to_new"></result>
+        <result property="customerOwnership" column="customer_ownership"></result>
+        <result property="availableSignTime" column="available_sign_time"></result>
+        <result property="mortgageHandle" column="mortgage_handle"></result>
+        <result property="remark" column="remark"></result>
+        <result property="blockFlag" column="block_flag"></result>
+        <result property="createAt" column="create_time"></result>
+    </resultMap>
+
+    <insert id="insert" parameterType="model.Deal" useGeneratedKeys="false">
+        INSERT INTO xiaolu_excel.excel_deal(deal_id, subscription_time, recognition_time, property_type, deal_section, decoration, building_id, room_num, customer_name, wechat_id, customer_tel, predicted_area, subscription_unit_price, subscription_total_price, discount_detail, five_to_fifteen, fifteen_after_discount, opening_quotation_discount, discount_of_contract_ontime, actual_deal_unit_price, deal_total_price_input, deal_total_price_check, amount_of_payment_first, date_of_payment_first, amount_of_payment_second, date_of_payment_second, amount_of_payment_third, date_of_payment_third, arrange_contract_date, subscription_without_contract, actual_contract_date, loan_amount, transact_loan_date, loan_bank, payment_method, payment_rate, accumulative_payment, un_payment, complete_payment_date, mortgage_schedule, sales_company, staff_percentage, realty_consultant_salary, realty_consultant, abutment_person, agreement_authentication_date, address, card_id, age, residential_zone, work_zone, occupation, access_known, referee, referee_tel, realty_purpose, realty_times, salary_settlement_submit_time, salary_grant_time, salary_settlement_rate, settle_salary_rate, settle_salary_money, salary_settlement_submit_time_second, salary_grant_time_second, salary_settlement_rate_second, deposit, predicted_deliver_time, sign_purchase_contract, sign_property_contract, intermediary_money, old_to_new, customer_ownership, available_sign_time, mortgage_handle, remark, block_flag, create_time)
+        VALUES (#{dealId}, #{subscriptionTime}, #{recognitionTime}, #{propertyType}, #{dealSection}, #{decoration}, #{buildingId}, #{roomNum}, #{customerName}, #{wechatId}, #{customerTel}, #{predictedArea}, #{subscriptionUnitPrice}, #{subscriptionTotalPrice}, #{discountDetail}, #{fiveToFifteen}, #{fifteenAfterDiscount}, #{openingQuotationDiscount}, #{discountOfContractOntime}, #{actualDealUnitPrice}, #{dealTotalPriceInput}, #{dealTotalPriceCheck}, #{amountOfPaymentFirst}, #{dateOfPaymentFirst}, #{amountOfPaymentSecond}, #{dateOfPaymentSecond}, #{amountOfPaymentThird}, #{dateOfPaymentThird}, #{arrangeContractDate}, #{subscriptionWithoutContract}, #{actualContractDate}, #{loanAmount}, #{transactLoanDate}, #{loanBank}, #{paymentMethod}, #{paymentRate}, #{accumulativePayment}, #{unPayment}, #{completePaymentDate}, #{mortgageSchedule}, #{salesCompany}, #{staffPercentage}, #{realtyConsultantSalary}, #{realtyConsultant}, #{abutmentPerson}, #{agreementAuthenticationDate}, #{address}, #{cardId}, #{age}, #{residentialZone}, #{workZone}, #{occupation}, #{accessKnown}, #{referee}, #{refereeTel}, #{realtyPurpose}, #{realtyTimes}, #{salarySettlementSubmitTime}, #{salaryGrantTime}, #{salarySettlementRate}, #{settleSalaryRate}, #{settleSalaryMoney}, #{salarySettlementSubmitTimeSecond}, #{salaryGrantTimeSecond}, #{salarySettlementRateSecond}, #{deposit}, #{predictedDeliverTime}, #{signPurchaseContract}, #{signPropertyContract}, #{intermediaryMoney}, #{oldToNew}, #{customerOwnership}, #{availableSignTime}, #{mortgageHandle}, #{remark}, #{blockFlag}, #{createAt})
+    </insert>
+
+    <select id="query" parameterType="java.util.Map" resultMap="dealVo">
+        SELECT deal_id, subscription_time, recognition_time, property_type, deal_section, decoration, building_id, room_num, customer_name, wechat_id, customer_tel, predicted_area, subscription_unit_price, subscription_total_price, discount_detail, five_to_fifteen, fifteen_after_discount, opening_quotation_discount, discount_of_contract_ontime, actual_deal_unit_price, deal_total_price_input, deal_total_price_check, amount_of_payment_first, date_of_payment_first, amount_of_payment_second, date_of_payment_second, amount_of_payment_third, date_of_payment_third, arrange_contract_date, subscription_without_contract, actual_contract_date, loan_amount, transact_loan_date, loan_bank, payment_method, payment_rate, accumulative_payment, un_payment, complete_payment_date, mortgage_schedule, sales_company, staff_percentage, realty_consultant_salary, realty_consultant, abutment_person, agreement_authentication_date, address, card_id, age, residential_zone, work_zone, occupation, access_known, referee, referee_tel, realty_purpose, realty_times, salary_settlement_submit_time, salary_grant_time, salary_settlement_rate, settle_salary_rate, settle_salary_money, salary_settlement_submit_time_second, salary_grant_time_second, salary_settlement_rate_second, deposit, predicted_deliver_time, sign_purchase_contract, sign_property_contract, intermediary_money, old_to_new, customer_ownership, available_sign_time, mortgage_handle, remark, block_flag, create_time
+        FROM xiaolu_excel.excel_deal
+        WHERE 1 = 1
+        <if test="subscriptionTime != null">
+            AND subscription_time = #{subscriptionTime}
+        </if>
+        <if test="customerTel != null">
+            AND customer_tel = #{customerTel}
+        </if>
+        <if test="blockFlag != null">
+            AND block_flag = #{blockFlag}
+        </if>
+    </select>
+
+    <update id="update" parameterType="java.util.Map">
+        UPDATE xiaolu_excel.excel_deal
+        SET
+        <if test="blockFlag != null">
+            block_flag = #{blockFlag}
+        </if>
+        WHERE customer_tel = #{customerTel} AND subscription_time = #{subscriptionTime}
+    </update>
+</mapper>
