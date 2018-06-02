@@ -40,6 +40,21 @@
         </if>
     </select>
 
+    <select id="search" parameterType="java.util.Map" resultMap="intermediaryVo">
+        SELECT intermediary_id, report_time, customer_source, report_building, customer_name, customer_tel, intention_level, visit_time, visit_building, customer_situation, deal_time, deal_building, deal_roomnum, remark, block_flag, create_time
+        FROM xiaolu_excel.excel_intermediary
+        WHERE 1 = 1
+        <if test="startDate != null">
+            AND report_time &gt;= #{startDate}
+        </if>
+        <if test="endDate != null">
+            AND report_time &lt;= #{endDate}
+        </if>
+        <if test="blockFlag != null">
+            AND block_flag = #{blockFlag}
+        </if>
+    </select>
+
     <update id="update" parameterType="java.util.Map">
         UPDATE xiaolu_excel.excel_intermediary
         SET

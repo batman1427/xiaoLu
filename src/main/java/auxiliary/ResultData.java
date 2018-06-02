@@ -7,9 +7,11 @@ public class ResultData {
     private ResponseCode responseCode;
     private Object data;
     private String description;
+    private String fileUrl;
 
     public ResultData() {
         this.responseCode = ResponseCode.RESPONSE_OK;
+        this.fileUrl = "";
     }
 
     public ResponseCode getResponseCode() {
@@ -34,6 +36,14 @@ public class ResultData {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getFileUrl() {
+        return fileUrl;
+    }
+
+    public void setFileUrl(String fileUrl) {
+        this.fileUrl = fileUrl;
     }
 
     @Override

@@ -4,7 +4,7 @@ public class Visit extends Entity {
 
     private String visitId;
 
-    private String visitTime;
+    private int visitTime;
 
     private String customerName;
 
@@ -50,7 +50,7 @@ public class Visit extends Entity {
         super();
     }
 
-    public Visit(String visitTime, String customerName, String customerTel, String visitedTimes, String intentionalArea, String acceptPrice, String realtyTimes, String age, String residentialZone, String workZone, String occupation, String accessKnown, String realtyPurpose, String realtyType, String concerns, String customerDescription, String latestState, String customerType, String realtyConsultant, String dealTime, String dealRoomnum) {
+    public Visit(int visitTime, String customerName, String customerTel, String visitedTimes, String intentionalArea, String acceptPrice, String realtyTimes, String age, String residentialZone, String workZone, String occupation, String accessKnown, String realtyPurpose, String realtyType, String concerns, String customerDescription, String latestState, String customerType, String realtyConsultant, String dealTime, String dealRoomnum) {
         this();
         this.visitTime = visitTime;
         this.customerName = customerName;
@@ -83,11 +83,11 @@ public class Visit extends Entity {
         this.visitId = visitId;
     }
 
-    public String getVisitTime() {
+    public int getVisitTime() {
         return visitTime;
     }
 
-    public void setVisitTime(String visitTime) {
+    public void setVisitTime(int visitTime) {
         this.visitTime = visitTime;
     }
 

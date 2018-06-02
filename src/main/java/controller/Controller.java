@@ -5,6 +5,8 @@ import auxiliary.ResponseCode;
 import auxiliary.ResultData;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import excel.XiaoluExcel;
+import form.IntermediaryForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +15,13 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import service.XiaoLuService;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +31,9 @@ public class Controller {
 
     @Autowired
     private XiaoLuService xiaoLuService;
+
+    @Autowired
+    private XiaoluExcel xiaoluExcel;
 
     /**
      * This method is used to upload files.
@@ -63,6 +75,102 @@ public class Controller {
                 json.add(temp);
             }
             result.setData(json);
+            return result;
+        }
+    }
+
+    /**
+     * This method is used to fetch intermediary.
+     * @return
+     */
+    @CrossOrigin
+    @RequestMapping("/intermediary")
+    public ResultData fetchIntermediary() {
+        ResultData result = new ResultData();
+        Map<String, Object> condition = new HashMap<>();
+        condition.put("blockFlag", false);
+        ResultData response = xiaoLuService.fetchIntermediary(condition);
+        result = this.setResponse(response);
+        condition.clear();
+        condition.put("data", response.getData());
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd-HHmmss");
+        String time = format.format(date);
+        condition.put("file", this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
+        condition.put("response", result.getResponseCode());
+        xiaoluExcel.createIntermediary(condition);
+        result.setFileUrl(this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
+        return result;
+    }
+
+    /**
+     * This method is used to fetch intermediary by conditon.
+     * @return
+     */
+    @CrossOrigin
+    @RequestMapping("/intermediary/search")
+    public ResultData fetchIntermediaryByConditon(IntermediaryForm form) {
+        String startDate = form.getStartDate().trim();
+        String endDate = form.getEndDate().trim();
+        ResultData result = new ResultData();
+        Map<String, Object> condition = new HashMap<>();
+        condition.put("blockFlag", false);
+        if(!startDate.equals("")) {
+            condition.put("startDate", startDate.replace("-", ""));
+        }
+        if(!endDate.equals("")) {
+            condition.put("endDate", endDate.replace("-", ""));
+        }
+        ResultData response = xiaoLuService.searchIntermediary(condition);
+        result = this.setResponse(response);
+        condition.clear();
+        condition.put("data", response.getData());
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd-HHmmss");
+        String time = format.format(date);
+        condition.put("file", this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
+        condition.put("response", result.getResponseCode());
+        xiaoluExcel.createIntermediary(condition);
+        result.setFileUrl(this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
+        return result;
+    }
+
+    /**
+     * This method is used to export file.
+     * @return
+     */
+    @CrossOrigin
+    @RequestMapping("/export")
+    public void export(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String fileUrl = request.getParameter("fileName");
+        File f = new File(fileUrl);
+        if(f.exists()){
+            FileInputStream fis = new FileInputStream(f);
+            String filename=URLEncoder.encode(f.getName(),"utf-8"); //解决中文文件名下载后乱码的问题
+            byte[] b = new byte[fis.available()];
+            fis.read(b);
+            response.setCharacterEncoding("utf-8");
+            response.setHeader("Content-Disposition","attachment; filename="+filename+"");
+            ServletOutputStream out =response.getOutputStream();
+            out.write(b);
+            out.flush();
+            out.close();
+        }
+    }
+
+    public ResultData setResponse(ResultData response){
+        ResultData result = new ResultData();
+        if (response.getResponseCode() == ResponseCode.RESPONSE_OK) {
+            result.setResponseCode(ResponseCode.RESPONSE_OK);
+            result.setData(response.getData());
+            return result;
+        }else if(response.getResponseCode() == ResponseCode.RESPONSE_NULL){
+            result.setResponseCode(ResponseCode.RESPONSE_NULL);
+            result.setDescription(response.getDescription());
+            return result;
+        }else{
+            result.setResponseCode(ResponseCode.RESPONSE_ERROR);
+            result.setDescription(response.getDescription());
             return result;
         }
     }

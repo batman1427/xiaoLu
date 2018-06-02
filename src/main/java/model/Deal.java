@@ -4,7 +4,7 @@ public class Deal extends Entity{
 
     private String dealId;
 
-    private String subscriptionTime;
+    private int subscriptionTime;
 
     private String recognitionTime;
 
@@ -156,7 +156,7 @@ public class Deal extends Entity{
         super();
     }
 
-    public Deal(String subscriptionTime, String recognitionTime, String propertyType, String dealSection, String decoration, String buildingId, String roomNum, String customerName, String wechatId, String customerTel, String predictedArea, String subscriptionUnitPrice, String subscriptionTotalPrice, String discountDetail, String fiveToFifteen, String fifteenAfterDiscount, String openingQuotationDiscount, String discountOfContractOntime, String actualDealUnitPrice, String dealTotalPriceInput, String dealTotalPriceCheck, String amountOfPaymentFirst, String dateOfPaymentFirst, String amountOfPaymentSecond, String dateOfPaymentSecond, String amountOfPaymentThird, String dateOfPaymentThird, String arrangeContractDate, String subscriptionWithoutContract, String actualContractDate, String loanAmount, String transactLoanDate, String loanBank, String paymentMethod, String paymentRate, String accumulativePayment, String unPayment, String completePaymentDate, String mortgageSchedule, String salesCompany, String staffPercentage, String realtyConsultantSalary, String realtyConsultant, String abutmentPerson, String agreementAuthenticationDate, String address, String cardId, String age, String residentialZone, String workZone, String occupation, String accessKnown, String referee, String refereeTel, String realtyPurpose, String realtyTimes, String salarySettlementSubmitTime, String salaryGrantTime, String salarySettlementRate, String settleSalaryRate, String settleSalaryMoney, String salarySettlementSubmitTimeSecond, String salaryGrantTimeSecond, String salarySettlementRateSecond, String deposit, String predictedDeliverTime, String signPurchaseContract, String signPropertyContract, String intermediaryMoney, String oldToNew, String customerOwnership, String availableSignTime, String mortgageHandle, String remark) {
+    public Deal(int subscriptionTime, String recognitionTime, String propertyType, String dealSection, String decoration, String buildingId, String roomNum, String customerName, String wechatId, String customerTel, String predictedArea, String subscriptionUnitPrice, String subscriptionTotalPrice, String discountDetail, String fiveToFifteen, String fifteenAfterDiscount, String openingQuotationDiscount, String discountOfContractOntime, String actualDealUnitPrice, String dealTotalPriceInput, String dealTotalPriceCheck, String amountOfPaymentFirst, String dateOfPaymentFirst, String amountOfPaymentSecond, String dateOfPaymentSecond, String amountOfPaymentThird, String dateOfPaymentThird, String arrangeContractDate, String subscriptionWithoutContract, String actualContractDate, String loanAmount, String transactLoanDate, String loanBank, String paymentMethod, String paymentRate, String accumulativePayment, String unPayment, String completePaymentDate, String mortgageSchedule, String salesCompany, String staffPercentage, String realtyConsultantSalary, String realtyConsultant, String abutmentPerson, String agreementAuthenticationDate, String address, String cardId, String age, String residentialZone, String workZone, String occupation, String accessKnown, String referee, String refereeTel, String realtyPurpose, String realtyTimes, String salarySettlementSubmitTime, String salaryGrantTime, String salarySettlementRate, String settleSalaryRate, String settleSalaryMoney, String salarySettlementSubmitTimeSecond, String salaryGrantTimeSecond, String salarySettlementRateSecond, String deposit, String predictedDeliverTime, String signPurchaseContract, String signPropertyContract, String intermediaryMoney, String oldToNew, String customerOwnership, String availableSignTime, String mortgageHandle, String remark) {
         this();
         this.subscriptionTime = subscriptionTime;
         this.recognitionTime = recognitionTime;
@@ -242,11 +242,11 @@ public class Deal extends Entity{
         this.dealId = dealId;
     }
 
-    public String getSubscriptionTime() {
+    public int getSubscriptionTime() {
         return subscriptionTime;
     }
 
-    public void setSubscriptionTime(String subscriptionTime) {
+    public void setSubscriptionTime(int subscriptionTime) {
         this.subscriptionTime = subscriptionTime;
     }
 

@@ -22,13 +22,13 @@ public class TimeFilter {
             String year = data[0];
             String month = "";
             if(Integer.valueOf(data[1])<10){
-                month = "0"+data[1];
+                month = "0"+String.valueOf(Integer.valueOf(data[1]));
             }else{
                 month = data[1];
             }
             String day = "";
             if(Integer.valueOf(data[2])<10){
-                day = "0"+data[2];
+                day = "0"+String.valueOf(Integer.valueOf(data[2]));
             }else{
                 day = data[2];
             }
@@ -51,13 +51,13 @@ public class TimeFilter {
             String month = "";
             data[1] = data[1].replace("月", "");
             if(Integer.valueOf(data[1])<10){
-                month = "0"+data[1];
+                month = "0"+String.valueOf(Integer.valueOf(data[1]));;
             }else{
                 month = data[1];
             }
             String day = "";
             if(Integer.valueOf(data[0])<10){
-                day = "0"+data[0];
+                day = "0"+String.valueOf(Integer.valueOf(data[0]));;
             }else{
                 day = data[0];
             }

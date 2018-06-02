@@ -5,7 +5,7 @@ public class Extension extends Entity {
 
     private String extensionId;
 
-    private String extensionTime;
+    private int extensionTime;
 
     private String extensionLocation;
 
@@ -31,7 +31,7 @@ public class Extension extends Entity {
         super();
     }
 
-    public Extension(String extensionTime, String extensionLocation, String customerName, String customerTel, String realtyConsultant, String visitTime, String customerSituation, String dealTime, String dealBuilding, String dealRoomnum, String remark) {
+    public Extension(int extensionTime, String extensionLocation, String customerName, String customerTel, String realtyConsultant, String visitTime, String customerSituation, String dealTime, String dealBuilding, String dealRoomnum, String remark) {
         this();
         this.extensionTime = extensionTime;
         this.extensionLocation = extensionLocation;
@@ -54,11 +54,11 @@ public class Extension extends Entity {
         this.extensionId = extensionId;
     }
 
-    public String getExtensionTime() {
+    public int getExtensionTime() {
         return extensionTime;
     }
 
-    public void setExtensionTime(String extensionTime) {
+    public void setExtensionTime(int extensionTime) {
         this.extensionTime = extensionTime;
     }
 

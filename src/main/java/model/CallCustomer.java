@@ -1,6 +1,5 @@
 package model;
 
-import dao.BaseDao;
 
 public class CallCustomer extends Entity {
 
@@ -16,7 +15,7 @@ public class CallCustomer extends Entity {
 
     private String customerTel;
 
-    private String callTime;
+    private int callTime;
 
     private String callSalesman;
 
@@ -44,7 +43,7 @@ public class CallCustomer extends Entity {
         super();
     }
 
-    public CallCustomer(String datasourceArea, String datasourceBuilding, String datasourceType, String customerName, String customerTel, String callTime, String callSalesman, String feedback, String intentionLevel, String intentionBuilding, String visitTime, String visitBuilding, String customerSituation, String dealTime, String dealBuilding, String dealRoomnum, String remark) {
+    public CallCustomer(String datasourceArea, String datasourceBuilding, String datasourceType, String customerName, String customerTel, int callTime, String callSalesman, String feedback, String intentionLevel, String intentionBuilding, String visitTime, String visitBuilding, String customerSituation, String dealTime, String dealBuilding, String dealRoomnum, String remark) {
         this();
         this.datasourceArea = datasourceArea;
         this.datasourceBuilding = datasourceBuilding;
@@ -113,11 +112,11 @@ public class CallCustomer extends Entity {
         this.customerTel = customerTel;
     }
 
-    public String getCallTime() {
+    public int getCallTime() {
         return callTime;
     }
 
-    public void setCallTime(String callTime) {
+    public void setCallTime(int callTime) {
         this.callTime = callTime;
     }
 

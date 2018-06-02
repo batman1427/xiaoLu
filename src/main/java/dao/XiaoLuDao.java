@@ -19,4 +19,8 @@ public interface XiaoLuDao {
     ResultData createDeal(Map<String, Object> condition);
 
     ResultData handleUnknown(Map<String, Object> condition);
+
+    ResultData queryIntermediary(Map<String, Object> condition);
+
+    ResultData searchIntermediary(Map<String , Object> condition);
 }

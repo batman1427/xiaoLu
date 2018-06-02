@@ -10,7 +10,7 @@ USE `xiaolu_excel`;
 
 CREATE TABLE IF NOT EXISTS `xiaolu_excel`.`excel_intermediary` (
   `intermediary_id` VARCHAR(40) NOT NULL,
-  `report_time` VARCHAR(40) NOT NULL,
+  `report_time` INT NOT NULL,
   `customer_source` VARCHAR(40),
   `report_building` VARCHAR(40),
   `customer_name` VARCHAR(40),
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `xiaolu_excel`.`excel_callcustomer` (
   `datasource_type` VARCHAR(40),
   `customer_name` VARCHAR(40),
   `customer_tel` VARCHAR(40) NOT NULL,
-  `call_time` VARCHAR(40) NOT NULL,
+  `call_time` INT NOT NULL,
   `call_salesman` VARCHAR(40),
   `feedback` VARCHAR(100),
   `intention_level` VARCHAR(40),
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `xiaolu_excel`.`excel_callcustomer` (
 
 CREATE TABLE IF NOT EXISTS `xiaolu_excel`.`excel_extension` (
   `extension_id` VARCHAR(40) NOT NULL,
-  `extension_time` VARCHAR(40) NOT NULL,
+  `extension_time` INT NOT NULL,
   `extension_location` VARCHAR(40),
   `customer_name` VARCHAR(40),
   `customer_tel` VARCHAR(40) NOT NULL,
@@ -77,7 +77,7 @@ CREATE TABLE IF NOT EXISTS `xiaolu_excel`.`excel_extension` (
 
 CREATE TABLE IF NOT EXISTS `xiaolu_excel`.`excel_incomingcall` (
   `incoming_call_id` VARCHAR(40) NOT NULL,
-  `call_time` VARCHAR(40) NOT NULL,
+  `call_time` INT NOT NULL,
   `customer_name` VARCHAR(40),
   `customer_tel` VARCHAR(40) NOT NULL,
   `realty_purpose` VARCHAR(40),
@@ -102,7 +102,7 @@ CREATE TABLE IF NOT EXISTS `xiaolu_excel`.`excel_incomingcall` (
 
 CREATE TABLE IF NOT EXISTS `xiaolu_excel`.`excel_visit` (
   `visit_id` VARCHAR(40) NOT NULL,
-  `visit_time` VARCHAR(40) NOT NULL,
+  `visit_time` INT NOT NULL,
   `customer_name` VARCHAR(40),
   `customer_tel` VARCHAR(40) NOT NULL,
   `visited_times` VARCHAR(40),
@@ -131,7 +131,7 @@ CREATE TABLE IF NOT EXISTS `xiaolu_excel`.`excel_visit` (
 
 CREATE TABLE IF NOT EXISTS `xiaolu_excel`.`excel_deal` (
   `deal_id` VARCHAR(40) NOT NULL ,
-  `subscription_time` VARCHAR(40) NOT NULL ,
+  `subscription_time` INT NOT NULL ,
   `recognition_time` VARCHAR(40),
   `property_type` VARCHAR(40),
   `deal_section` VARCHAR(40),

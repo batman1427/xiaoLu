@@ -4,7 +4,7 @@ public class Intermediary extends Entity {
 
     private String intermediaryId;
 
-    private String reportTime;
+    private int reportTime;
 
     private String customerSource;
 
@@ -34,7 +34,7 @@ public class Intermediary extends Entity {
         super();
     }
 
-    public Intermediary(String reportTime, String customerSource, String reportBuilding, String customerName, String customerTel, String intentionLevel, String visitTime, String visitBuilding, String customerSituation, String dealTime, String dealBuilding, String dealRoomnum, String remark) {
+    public Intermediary(int reportTime, String customerSource, String reportBuilding, String customerName, String customerTel, String intentionLevel, String visitTime, String visitBuilding, String customerSituation, String dealTime, String dealBuilding, String dealRoomnum, String remark) {
         this();
         this.reportTime = reportTime;
         this.customerSource = customerSource;
@@ -59,11 +59,11 @@ public class Intermediary extends Entity {
         this.intermediaryId = intermediaryId;
     }
 
-    public String getReportTime() {
+    public int getReportTime() {
         return reportTime;
     }
 
-    public void setReportTime(String reportTime) {
+    public void setReportTime(int reportTime) {
         this.reportTime = reportTime;
     }
 

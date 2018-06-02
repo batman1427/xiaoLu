@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -56,7 +57,7 @@ public class XiaoLuDaoImpl extends BaseDao implements XiaoLuDao{
                     for(int k=0;k<customerTel.size();k++){
                         condition.clear();
                         condition.put("blockFlag", false);
-                        Intermediary intermediary = new Intermediary(reportTime, customerSource, reportBuilding, customerName, customerTel.get(k), intentionLevel, visitTime, visitBuilding, customerSituation, dealTime, dealBuilding, dealRoomnum, remark);
+                        Intermediary intermediary = new Intermediary(Integer.valueOf(reportTime), customerSource, reportBuilding, customerName, customerTel.get(k), intentionLevel, visitTime, visitBuilding, customerSituation, dealTime, dealBuilding, dealRoomnum, remark);
                         intermediary.setIntermediaryId(IDGenerator.generate("ITM"));
                         if(reportTime.equals("false")){
                             ErrorLog errorLog = new ErrorLog(sheet.getSheetName(), i-1, "报备时间为空或者无法识别");
@@ -150,7 +151,7 @@ public class XiaoLuDaoImpl extends BaseDao implements XiaoLuDao{
                     for(int k=0;k<customerTel.size();k++){
                         condition.clear();
                         condition.put("blockFlag", false);
-                        CallCustomer callCustomer = new CallCustomer(datasourceArea, datasourceBuilding, datasourceType, customerName, customerTel.get(k), callTime, callSalesman, feedback, intentionLevel, intentionBuilding, visitTime, visitBuilding, customerSituation, dealTime, dealBuilding, dealRoomnum, remark);
+                        CallCustomer callCustomer = new CallCustomer(datasourceArea, datasourceBuilding, datasourceType, customerName, customerTel.get(k), Integer.valueOf(callTime), callSalesman, feedback, intentionLevel, intentionBuilding, visitTime, visitBuilding, customerSituation, dealTime, dealBuilding, dealRoomnum, remark);
                         callCustomer.setCallCustomerId(IDGenerator.generate("CCT"));
                         if(callTime.equals("false")){
                             ErrorLog errorLog = new ErrorLog(sheet.getSheetName(), i-1, "CALL客日期为空或者无法识别");
@@ -238,7 +239,7 @@ public class XiaoLuDaoImpl extends BaseDao implements XiaoLuDao{
                     for(int k=0;k<customerTel.size();k++){
                         condition.clear();
                         condition.put("blockFlag", false);
-                        Extension extension = new Extension(extensionTime, extensionLocation, customerName, customerTel.get(k), realtyConsultant, visitTime, customerSituation, dealTime, dealBuilding, dealRoomnum, remark);
+                        Extension extension = new Extension(Integer.valueOf(extensionTime), extensionLocation, customerName, customerTel.get(k), realtyConsultant, visitTime, customerSituation, dealTime, dealBuilding, dealRoomnum, remark);
                         extension.setExtensionId(IDGenerator.generate("EXT"));
                         if(extensionTime.equals("false")){
                             ErrorLog errorLog = new ErrorLog(sheet.getSheetName(), i-1, "外拓时间为空或者无法识别");
@@ -331,7 +332,7 @@ public class XiaoLuDaoImpl extends BaseDao implements XiaoLuDao{
                     for(int k=0;k<customerTel.size();k++){
                         condition.clear();
                         condition.put("blockFlag", false);
-                        IncomingCall incomingCall = new IncomingCall(callTime, customerName, customerTel.get(k), realtyPurpose, demandArea, houseType, residentialZone, acceptPrice, accessKnown, consultContent, visitTime, customerSituation, dealTime, dealBuilding, dealRoomnum, salesman);
+                        IncomingCall incomingCall = new IncomingCall(Integer.valueOf(callTime), customerName, customerTel.get(k), realtyPurpose, demandArea, houseType, residentialZone, acceptPrice, accessKnown, consultContent, visitTime, customerSituation, dealTime, dealBuilding, dealRoomnum, salesman);
                         incomingCall.setIncomingCallId(IDGenerator.generate("ICC"));
                         if(callTime.equals("false")){
                             ErrorLog errorLog = new ErrorLog(sheet.getSheetName(), i-1, "来电时间为空或者无法识别");
@@ -437,7 +438,7 @@ public class XiaoLuDaoImpl extends BaseDao implements XiaoLuDao{
                     for(int k=0;k<customerTel.size();k++){
                         condition.clear();
                         condition.put("blockFlag", false);
-                        Visit visit = new Visit(visitTime, customerName, customerTel.get(k), visitedTimes, intentionalArea, acceptPrice, realtyTimes, age, residentialZone, workZone, occupation, accessKnown, realtyPurpose, realtyType, concerns, customerDescription, latestState, customerType, realtyConsultant, dealTime, dealRoomnum);
+                        Visit visit = new Visit(Integer.valueOf(visitTime), customerName, customerTel.get(k), visitedTimes, intentionalArea, acceptPrice, realtyTimes, age, residentialZone, workZone, occupation, accessKnown, realtyPurpose, realtyType, concerns, customerDescription, latestState, customerType, realtyConsultant, dealTime, dealRoomnum);
                         visit.setVisitId(IDGenerator.generate("VIT"));
                         if(visitTime.equals("false")){
                             ErrorLog errorLog = new ErrorLog(sheet.getSheetName(), i, "来访时间为空或者无法识别");
@@ -509,20 +510,26 @@ public class XiaoLuDaoImpl extends BaseDao implements XiaoLuDao{
             if(cell!=null && cell.getCellType() == Cell.CELL_TYPE_FORMULA){
                 if(formulaEvaluator.evaluate(cell).getCellType() == Cell.CELL_TYPE_NUMERIC){
                     if(HSSFDateUtil.isCellDateFormatted(cell)){
-                        result = cell.getDateCellValue().toString();
+                        Date date = cell.getDateCellValue();
+                        SimpleDateFormat format = new SimpleDateFormat("yyyy"+"/"+"MM"+"/"+"dd");
+                        result = format.format(date);
                     }else {
                         result = String.valueOf(formulaEvaluator.evaluate(cell).getNumberValue());
                     }
                 }else {
                     if(cell.getCellType() == Cell.CELL_TYPE_NUMERIC && HSSFDateUtil.isCellDateFormatted(cell)){
-                        result = cell.getDateCellValue().toString();
+                        Date date = cell.getDateCellValue();
+                        SimpleDateFormat format = new SimpleDateFormat("yyyy"+"/"+"MM"+"/"+"dd");
+                        result = format.format(date);
                     }else {
                         result = String.valueOf(formulaEvaluator.evaluate(cell).getStringValue());
                     }
                 }
             }else{
                 if(cell.getCellType() == Cell.CELL_TYPE_NUMERIC && HSSFDateUtil.isCellDateFormatted(cell)){
-                    result = cell.getDateCellValue().toString();
+                    Date date = cell.getDateCellValue();
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy"+"/"+"MM"+"/"+"dd");
+                    result = format.format(date);
                 }else {
                     result = cell == null ? "" : cell.toString().trim();
                 }
@@ -531,13 +538,17 @@ public class XiaoLuDaoImpl extends BaseDao implements XiaoLuDao{
             if(cell!=null && cell.getCellType() == Cell.CELL_TYPE_FORMULA){
                 if(formulaEvaluator.evaluate(cell).getCellType() == Cell.CELL_TYPE_NUMERIC){
                     if(org.apache.poi.ss.usermodel.DateUtil.isCellDateFormatted(cell)){
-                        result = cell.getDateCellValue().toString();
+                        Date date = cell.getDateCellValue();
+                        SimpleDateFormat format = new SimpleDateFormat("yyyy"+"/"+"MM"+"/"+"dd");
+                        result = format.format(date);
                     }else {
                         result = String.valueOf(formulaEvaluator.evaluate(cell).getNumberValue());
                     }
                 }else {
                     if(cell.getCellType() == Cell.CELL_TYPE_NUMERIC && org.apache.poi.ss.usermodel.DateUtil.isCellDateFormatted(cell)){
-                        result = cell.getDateCellValue().toString();
+                        Date date = cell.getDateCellValue();
+                        SimpleDateFormat format = new SimpleDateFormat("yyyy"+"/"+"MM"+"/"+"dd");
+                        result = format.format(date);
                     }else {
                         result = String.valueOf(formulaEvaluator.evaluate(cell).getStringValue());
                     }
@@ -547,7 +558,9 @@ public class XiaoLuDaoImpl extends BaseDao implements XiaoLuDao{
                  * can not handle "付款日期3"
                  */
                 if(cell.getCellType() == Cell.CELL_TYPE_NUMERIC && org.apache.poi.ss.usermodel.DateUtil.isCellDateFormatted(cell)){
-                    result = cell.getDateCellValue().toString();
+                    Date date = cell.getDateCellValue();
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy"+"/"+"MM"+"/"+"dd");
+                    result = format.format(date);
                 }else {
                     result = cell == null ? "" : cell.toString().trim();
                 }
@@ -604,18 +617,16 @@ public class XiaoLuDaoImpl extends BaseDao implements XiaoLuDao{
                     String amountOfPaymentFirst = getCellValueFormula(row.getCell(22), formulaEvaluator, end);
                     String dateOfPaymentFirst = getCellValueFormula(row.getCell(23), formulaEvaluator, end);
                     String amountOfPaymentSecond = getCellValueFormula(row.getCell(24), formulaEvaluator, end);
-
                     String dateOfPaymentSecond = getCellValueFormula(row.getCell(25), formulaEvaluator, end);
                     String amountOfPaymentThird = getCellValueFormula(row.getCell(26), formulaEvaluator, end);
+
                     String dateOfPaymentThird = getCellValueFormula(row.getCell(27), formulaEvaluator, end);
 
                     String arrangeContractDate = getCellValueFormula(row.getCell(28), formulaEvaluator, end);
                     String subscriptionWithoutContract = getCellValueFormula(row.getCell(29), formulaEvaluator, end);
                     String actualContractDate = getCellValueFormula(row.getCell(30), formulaEvaluator, end);
                     String loanAmount = getCellValueFormula(row.getCell(31), formulaEvaluator, end);
-
                     String transactLoanDate = getCellValueFormula(row.getCell(32), formulaEvaluator, end);
-
                     String loanBank = getCellValueFormula(row.getCell(33), formulaEvaluator, end);
                     String paymentMethod = getCellValueFormula(row.getCell(34), formulaEvaluator, end);
                     String paymentRate = getCellValueFormula(row.getCell(35), formulaEvaluator, end);
@@ -666,7 +677,7 @@ public class XiaoLuDaoImpl extends BaseDao implements XiaoLuDao{
                     for(int k=0;k<customerTel.size();k++){
                         condition.clear();
                         condition.put("blockFlag", false);
-                        Deal deal = new Deal(subscriptionTime, recognitionTime, propertyType, dealSection, decoration, buildingId, roomNum, customerName, wechatId, customerTel.get(k), predictedArea, subscriptionUnitPrice, subscriptionTotalPrice, discountDetail, fiveToFifteen, fifteenAfterDiscount, openingQuotationDiscount, discountOfContractOntime, actualDealUnitPrice, dealTotalPriceInput, dealTotalPriceCheck, amountOfPaymentFirst, dateOfPaymentFirst, amountOfPaymentSecond, dateOfPaymentSecond, amountOfPaymentThird, dateOfPaymentThird, arrangeContractDate, subscriptionWithoutContract, actualContractDate, loanAmount, transactLoanDate, loanBank, paymentMethod, paymentRate, accumulativePayment, unPayment, completePaymentDate, mortgageSchedule, salesCompany, staffPercentage, realtyConsultantSalary, realtyConsultant, abutmentPerson, agreementAuthenticationDate, address, cardId, age, residentialZone, workZone, occupation, accessKnown, referee, refereeTel, realtyPurpose, realtyTimes, salarySettlementSubmitTime, salaryGrantTime, salarySettlementRate, settleSalaryRate, settleSalaryMoney, salarySettlementSubmitTimeSecond, salaryGrantTimeSecond, salarySettlementRateSecond, deposit, predictedDeliverTime, signPurchaseContract, signPropertyContract, intermediaryMoney, oldToNew, customerOwnership, availableSignTime, mortgageHandle, remark);
+                        Deal deal = new Deal(Integer.valueOf(subscriptionTime), recognitionTime, propertyType, dealSection, decoration, buildingId, roomNum, customerName, wechatId, customerTel.get(k), predictedArea, subscriptionUnitPrice, subscriptionTotalPrice, discountDetail, fiveToFifteen, fifteenAfterDiscount, openingQuotationDiscount, discountOfContractOntime, actualDealUnitPrice, dealTotalPriceInput, dealTotalPriceCheck, amountOfPaymentFirst, dateOfPaymentFirst, amountOfPaymentSecond, dateOfPaymentSecond, amountOfPaymentThird, dateOfPaymentThird, arrangeContractDate, subscriptionWithoutContract, actualContractDate, loanAmount, transactLoanDate, loanBank, paymentMethod, paymentRate, accumulativePayment, unPayment, completePaymentDate, mortgageSchedule, salesCompany, staffPercentage, realtyConsultantSalary, realtyConsultant, abutmentPerson, agreementAuthenticationDate, address, cardId, age, residentialZone, workZone, occupation, accessKnown, referee, refereeTel, realtyPurpose, realtyTimes, salarySettlementSubmitTime, salaryGrantTime, salarySettlementRate, settleSalaryRate, settleSalaryMoney, salarySettlementSubmitTimeSecond, salaryGrantTimeSecond, salarySettlementRateSecond, deposit, predictedDeliverTime, signPurchaseContract, signPropertyContract, intermediaryMoney, oldToNew, customerOwnership, availableSignTime, mortgageHandle, remark);
                         deal.setDealId(IDGenerator.generate("DEA"));
                         if(subscriptionTime.equals("false")){
                             ErrorLog errorLog = new ErrorLog(sheet.getSheetName(), i, "认购日期为空或者无法识别");
@@ -730,6 +741,38 @@ public class XiaoLuDaoImpl extends BaseDao implements XiaoLuDao{
         ErrorLog errorLog = new ErrorLog(sheet.getSheetName(), -1, "不能识别的表格类型");
         errorLogList.add(errorLog);
         result.setData(errorLogList);
+        return result;
+    }
+
+    @Override
+    public ResultData queryIntermediary(Map<String, Object> condition) {
+        ResultData result = new ResultData();
+        try {
+            List<Intermediary> list = sqlSession.selectList("xiaolu.intermediary.query", condition);
+            if (list.isEmpty()) {
+                result.setResponseCode(ResponseCode.RESPONSE_NULL);
+            }
+            result.setData(list);
+        } catch (Exception e) {
+            result.setResponseCode(ResponseCode.RESPONSE_ERROR);
+            result.setDescription(e.getMessage());
+        }
+        return result;
+    }
+
+    @Override
+    public ResultData searchIntermediary(Map<String, Object> condition) {
+        ResultData result = new ResultData();
+        try {
+            List<Intermediary> list = sqlSession.selectList("xiaolu.intermediary.search", condition);
+            if (list.isEmpty()) {
+                result.setResponseCode(ResponseCode.RESPONSE_NULL);
+            }
+            result.setData(list);
+        } catch (Exception e) {
+            result.setResponseCode(ResponseCode.RESPONSE_ERROR);
+            result.setDescription(e.getMessage());
+        }
         return result;
     }
 

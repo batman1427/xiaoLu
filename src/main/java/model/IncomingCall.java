@@ -4,7 +4,7 @@ public class IncomingCall extends Entity{
 
     private String incomingCallId;
 
-    private String callTime;
+    private int callTime;
 
     private String customerName;
 
@@ -40,7 +40,7 @@ public class IncomingCall extends Entity{
         super();
     }
 
-    public IncomingCall(String callTime, String customerName, String customerTel, String realtyPurpose, String demandArea, String houseType, String residentialZone, String acceptPrice, String accessKnown, String consultContent, String visitTime, String customerSituation, String dealTime, String dealBuilding, String dealRoomnum, String salesman) {
+    public IncomingCall(int callTime, String customerName, String customerTel, String realtyPurpose, String demandArea, String houseType, String residentialZone, String acceptPrice, String accessKnown, String consultContent, String visitTime, String customerSituation, String dealTime, String dealBuilding, String dealRoomnum, String salesman) {
         this();
         this.callTime = callTime;
         this.customerName = customerName;
@@ -68,11 +68,11 @@ public class IncomingCall extends Entity{
         this.incomingCallId = incomingCallId;
     }
 
-    public String getCallTime() {
+    public int getCallTime() {
         return callTime;
     }
 
-    public void setCallTime(String callTime) {
+    public void setCallTime(int callTime) {
         this.callTime = callTime;
     }
 
