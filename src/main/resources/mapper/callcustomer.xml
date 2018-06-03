@@ -42,6 +42,7 @@
         <if test="blockFlag != null">
             AND block_flag = #{blockFlag}
         </if>
+        ORDER BY call_time DESC
     </select>
 
     <select id="search" parameterType="java.util.Map" resultMap="callcustomerVo">
@@ -57,6 +58,7 @@
         <if test="blockFlag != null">
             AND block_flag = #{blockFlag}
         </if>
+        ORDER BY call_time DESC
     </select>
 
     <update id="update" parameterType="java.util.Map">

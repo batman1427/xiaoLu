@@ -36,6 +36,7 @@
         <if test="blockFlag != null">
             AND block_flag = #{blockFlag}
         </if>
+        ORDER BY extension_time DESC
     </select>
 
     <select id="search" parameterType="java.util.Map" resultMap="extensionVo">
@@ -51,6 +52,7 @@
         <if test="blockFlag != null">
             AND block_flag = #{blockFlag}
         </if>
+        ORDER BY extension_time DESC
     </select>
 
     <update id="update" parameterType="java.util.Map">

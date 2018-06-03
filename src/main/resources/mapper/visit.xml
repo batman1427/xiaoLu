@@ -46,6 +46,23 @@
         <if test="blockFlag != null">
             AND block_flag = #{blockFlag}
         </if>
+        ORDER BY visit_time DESC
+    </select>
+
+    <select id="search" parameterType="java.util.Map" resultMap="visitVo">
+        SELECT visit_id, visit_time, customer_name, customer_tel, visited_times, intentional_area, accept_price, realty_times, age, residential_zone, work_zone, occupation, access_known, realty_purpose, realty_type, concerns, customer_description, latest_state, customer_type, realty_consultant, deal_time, deal_roomnum, block_flag, create_time
+        FROM xiaolu_excel.excel_visit
+        WHERE 1 = 1
+        <if test="startDate != null">
+            AND visit_time &gt;= #{startDate}
+        </if>
+        <if test="endDate != null">
+            AND visit_time &lt;= #{endDate}
+        </if>
+        <if test="blockFlag != null">
+            AND block_flag = #{blockFlag}
+        </if>
+        ORDER BY visit_time DESC
     </select>
 
     <update id="update" parameterType="java.util.Map">

@@ -35,4 +35,12 @@ public interface XiaoLuDao {
     ResultData queryIncomingCall(Map<String, Object> condition);
 
     ResultData searchIncomingCall(Map<String , Object> condition);
+
+    ResultData queryVisit(Map<String, Object> condition);
+
+    ResultData searchVisit(Map<String , Object> condition);
+
+    ResultData queryDeal(Map<String, Object> condition);
+
+    ResultData searchDeal(Map<String , Object> condition);
 }

@@ -304,6 +304,118 @@ public class Controller {
     }
 
     /**
+     * This method is used to fetch visit.
+     * @return
+     */
+    @CrossOrigin
+    @RequestMapping("/visit")
+    public ResultData fetchVisit() {
+        ResultData result = new ResultData();
+        Map<String, Object> condition = new HashMap<>();
+        condition.put("blockFlag", false);
+        ResultData response = xiaoLuService.fetchVisit(condition);
+        result = this.setResponse(response);
+        condition.clear();
+        condition.put("data", response.getData());
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd-HHmmss");
+        String time = format.format(date);
+        condition.put("file", this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
+        condition.put("response", result.getResponseCode());
+        xiaoluExcel.createVisit(condition);
+        result.setFileUrl(this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
+        return result;
+    }
+
+    /**
+     * This method is used to fetch visit by conditon.
+     * @return
+     */
+    @CrossOrigin
+    @RequestMapping("/visit/search")
+    public ResultData fetchVisitByConditon(DateForm form) {
+        String startDate = form.getStartDate().trim();
+        String endDate = form.getEndDate().trim();
+        ResultData result = new ResultData();
+        Map<String, Object> condition = new HashMap<>();
+        condition.put("blockFlag", false);
+        if(!startDate.equals("")) {
+            condition.put("startDate", startDate.replace("-", ""));
+        }
+        if(!endDate.equals("")) {
+            condition.put("endDate", endDate.replace("-", ""));
+        }
+        ResultData response = xiaoLuService.searchVisit(condition);
+        result = this.setResponse(response);
+        condition.clear();
+        condition.put("data", response.getData());
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd-HHmmss");
+        String time = format.format(date);
+        condition.put("file", this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
+        condition.put("response", result.getResponseCode());
+        xiaoluExcel.createVisit(condition);
+        result.setFileUrl(this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
+        return result;
+    }
+
+    /**
+     * This method is used to fetch deal.
+     * @return
+     */
+    @CrossOrigin
+    @RequestMapping("/deal")
+    public ResultData fetchDeal() {
+        ResultData result = new ResultData();
+        Map<String, Object> condition = new HashMap<>();
+        condition.put("blockFlag", false);
+        ResultData response = xiaoLuService.fetchDeal(condition);
+        result = this.setResponse(response);
+        condition.clear();
+        condition.put("data", response.getData());
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd-HHmmss");
+        String time = format.format(date);
+        condition.put("file", this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
+        condition.put("response", result.getResponseCode());
+        xiaoluExcel.createDeal(condition);
+        result.setFileUrl(this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
+        return result;
+    }
+
+    /**
+     * This method is used to fetch deal by conditon.
+     * @return
+     */
+    @CrossOrigin
+    @RequestMapping("/deal/search")
+    public ResultData fetchDealByConditon(DateForm form) {
+        String startDate = form.getStartDate().trim();
+        String endDate = form.getEndDate().trim();
+        ResultData result = new ResultData();
+        Map<String, Object> condition = new HashMap<>();
+        condition.put("blockFlag", false);
+        if(!startDate.equals("")) {
+            condition.put("startDate", startDate.replace("-", ""));
+        }
+        if(!endDate.equals("")) {
+            condition.put("endDate", endDate.replace("-", ""));
+        }
+        ResultData response = xiaoLuService.searchDeal(condition);
+        result = this.setResponse(response);
+        condition.clear();
+        condition.put("data", response.getData());
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd-HHmmss");
+        String time = format.format(date);
+        condition.put("file", this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
+        condition.put("response", result.getResponseCode());
+        xiaoluExcel.createDeal(condition);
+        result.setFileUrl(this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
+        return result;
+    }
+
+    /**
      * This method is used to export file.
      * @return
      */

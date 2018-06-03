@@ -872,4 +872,68 @@ public class XiaoLuDaoImpl extends BaseDao implements XiaoLuDao{
         return result;
     }
 
+    @Override
+    public ResultData queryVisit(Map<String, Object> condition) {
+        ResultData result = new ResultData();
+        try {
+            List<Visit> list = sqlSession.selectList("xiaolu.visit.query", condition);
+            if (list.isEmpty()) {
+                result.setResponseCode(ResponseCode.RESPONSE_NULL);
+            }
+            result.setData(list);
+        } catch (Exception e) {
+            result.setResponseCode(ResponseCode.RESPONSE_ERROR);
+            result.setDescription(e.getMessage());
+        }
+        return result;
+    }
+
+    @Override
+    public ResultData searchVisit(Map<String, Object> condition) {
+        ResultData result = new ResultData();
+        try {
+            List<Visit> list = sqlSession.selectList("xiaolu.visit.search", condition);
+            if (list.isEmpty()) {
+                result.setResponseCode(ResponseCode.RESPONSE_NULL);
+            }
+            result.setData(list);
+        } catch (Exception e) {
+            result.setResponseCode(ResponseCode.RESPONSE_ERROR);
+            result.setDescription(e.getMessage());
+        }
+        return result;
+    }
+
+    @Override
+    public ResultData queryDeal(Map<String, Object> condition) {
+        ResultData result = new ResultData();
+        try {
+            List<Deal> list = sqlSession.selectList("xiaolu.deal.query", condition);
+            if (list.isEmpty()) {
+                result.setResponseCode(ResponseCode.RESPONSE_NULL);
+            }
+            result.setData(list);
+        } catch (Exception e) {
+            result.setResponseCode(ResponseCode.RESPONSE_ERROR);
+            result.setDescription(e.getMessage());
+        }
+        return result;
+    }
+
+    @Override
+    public ResultData searchDeal(Map<String, Object> condition) {
+        ResultData result = new ResultData();
+        try {
+            List<Deal> list = sqlSession.selectList("xiaolu.deal.search", condition);
+            if (list.isEmpty()) {
+                result.setResponseCode(ResponseCode.RESPONSE_NULL);
+            }
+            result.setData(list);
+        } catch (Exception e) {
+            result.setResponseCode(ResponseCode.RESPONSE_ERROR);
+            result.setDescription(e.getMessage());
+        }
+        return result;
+    }
+
 }

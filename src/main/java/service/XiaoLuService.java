@@ -23,4 +23,12 @@ public interface XiaoLuService {
         ResultData fetchIncomingCall(Map<String, Object> condition);
 
         ResultData searchIncomingCall(Map<String, Object> condition);
+
+        ResultData fetchVisit(Map<String, Object> condition);
+
+        ResultData searchVisit(Map<String, Object> condition);
+
+        ResultData fetchDeal(Map<String, Object> condition);
+
+        ResultData searchDeal(Map<String, Object> condition);
 }

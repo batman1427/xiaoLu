@@ -99,6 +99,23 @@
         <if test="blockFlag != null">
             AND block_flag = #{blockFlag}
         </if>
+        ORDER BY subscription_time DESC
+    </select>
+
+    <select id="search" parameterType="java.util.Map" resultMap="dealVo">
+        SELECT deal_id, subscription_time, recognition_time, property_type, deal_section, decoration, building_id, room_num, customer_name, wechat_id, customer_tel, predicted_area, subscription_unit_price, subscription_total_price, discount_detail, five_to_fifteen, fifteen_after_discount, opening_quotation_discount, discount_of_contract_ontime, actual_deal_unit_price, deal_total_price_input, deal_total_price_check, amount_of_payment_first, date_of_payment_first, amount_of_payment_second, date_of_payment_second, amount_of_payment_third, date_of_payment_third, arrange_contract_date, subscription_without_contract, actual_contract_date, loan_amount, transact_loan_date, loan_bank, payment_method, payment_rate, accumulative_payment, un_payment, complete_payment_date, mortgage_schedule, sales_company, staff_percentage, realty_consultant_salary, realty_consultant, abutment_person, agreement_authentication_date, address, card_id, age, residential_zone, work_zone, occupation, access_known, referee, referee_tel, realty_purpose, realty_times, salary_settlement_submit_time, salary_grant_time, salary_settlement_rate, settle_salary_rate, settle_salary_money, salary_settlement_submit_time_second, salary_grant_time_second, salary_settlement_rate_second, deposit, predicted_deliver_time, sign_purchase_contract, sign_property_contract, intermediary_money, old_to_new, customer_ownership, available_sign_time, mortgage_handle, remark, block_flag, create_time
+        FROM xiaolu_excel.excel_deal
+        WHERE 1 = 1
+        <if test="startDate != null">
+            AND subscription_time &gt;= #{startDate}
+        </if>
+        <if test="endDate != null">
+            AND subscription_time &lt;= #{endDate}
+        </if>
+        <if test="blockFlag != null">
+            AND block_flag = #{blockFlag}
+        </if>
+        ORDER BY subscription_time DESC
     </select>
 
     <update id="update" parameterType="java.util.Map">

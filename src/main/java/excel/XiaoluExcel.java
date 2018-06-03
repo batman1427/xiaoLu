@@ -1,7 +1,5 @@
 package excel;
 
-import auxiliary.ResultData;
-
 import java.util.Map;
 
 public interface XiaoluExcel {
@@ -13,4 +11,9 @@ public interface XiaoluExcel {
     void createExtension(Map<String, Object> conditon);
 
     void createIncomingCall(Map<String, Object> condition);
+
+    void createVisit(Map<String, Object> condition);
+
+    void createDeal(Map<String, Object> condition);
+
 }

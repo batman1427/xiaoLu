@@ -2,10 +2,7 @@ package excel.impl;
 
 import auxiliary.ResultData;
 import excel.XiaoluExcel;
-import excel.template.CallCustomerExcel;
-import excel.template.ExtensionExcel;
-import excel.template.IncomingCallExcel;
-import excel.template.IntermediaryExcel;
+import excel.template.*;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -45,6 +42,24 @@ public class XiaoluExcelImpl implements XiaoluExcel {
     public void createIncomingCall(Map<String, Object> condition) {
         try {
             IncomingCallExcel.createTable(condition);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void createVisit(Map<String, Object> condition) {
+        try {
+            VisitExcel.createTable(condition);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void createDeal(Map<String, Object> condition) {
+        try {
+            DealExcel.createTable(condition);
         } catch (IOException e) {
             e.printStackTrace();
         }

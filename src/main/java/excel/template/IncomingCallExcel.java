@@ -1,7 +1,6 @@
 package excel.template;
 
 import model.IncomingCall;
-import model.Intermediary;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
