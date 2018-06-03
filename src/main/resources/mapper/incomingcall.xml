@@ -43,6 +43,21 @@
         </if>
     </select>
 
+    <select id="search" parameterType="java.util.Map" resultMap="incomingcallVo">
+        SELECT incoming_call_id, call_time, customer_name, customer_tel, realty_purpose, demand_area, house_type, residential_zone, accept_price, access_known, consult_content, visit_time, customer_situation, deal_time, deal_building, deal_roomnum, salesman, block_flag, create_time
+        FROM xiaolu_excel.excel_incomingcall
+        WHERE 1 = 1
+        <if test="startDate != null">
+            AND call_time &gt;= #{startDate}
+        </if>
+        <if test="endDate != null">
+            AND call_time &lt;= #{endDate}
+        </if>
+        <if test="blockFlag != null">
+            AND block_flag = #{blockFlag}
+        </if>
+    </select>
+
     <update id="update" parameterType="java.util.Map">
         UPDATE xiaolu_excel.excel_incomingcall
         SET

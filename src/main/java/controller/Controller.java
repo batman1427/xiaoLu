@@ -6,7 +6,7 @@ import auxiliary.ResultData;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import excel.XiaoluExcel;
-import form.IntermediaryForm;
+import form.DateForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -109,7 +109,7 @@ public class Controller {
      */
     @CrossOrigin
     @RequestMapping("/intermediary/search")
-    public ResultData fetchIntermediaryByConditon(IntermediaryForm form) {
+    public ResultData fetchIntermediaryByConditon(DateForm form) {
         String startDate = form.getStartDate().trim();
         String endDate = form.getEndDate().trim();
         ResultData result = new ResultData();
@@ -131,6 +131,174 @@ public class Controller {
         condition.put("file", this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
         condition.put("response", result.getResponseCode());
         xiaoluExcel.createIntermediary(condition);
+        result.setFileUrl(this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
+        return result;
+    }
+
+    /**
+     * This method is used to fetch callcustomer.
+     * @return
+     */
+    @CrossOrigin
+    @RequestMapping("/callcustomer")
+    public ResultData fetchCallCustomer() {
+        ResultData result = new ResultData();
+        Map<String, Object> condition = new HashMap<>();
+        condition.put("blockFlag", false);
+        ResultData response = xiaoLuService.fetchCallCustomer(condition);
+        result = this.setResponse(response);
+        condition.clear();
+        condition.put("data", response.getData());
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd-HHmmss");
+        String time = format.format(date);
+        condition.put("file", this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
+        condition.put("response", result.getResponseCode());
+        xiaoluExcel.createCallCustomer(condition);
+        result.setFileUrl(this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
+        return result;
+    }
+
+    /**
+     * This method is used to fetch callcustomer by conditon.
+     * @return
+     */
+    @CrossOrigin
+    @RequestMapping("/callcustomer/search")
+    public ResultData fetchCallCustomerByConditon(DateForm form) {
+        String startDate = form.getStartDate().trim();
+        String endDate = form.getEndDate().trim();
+        ResultData result = new ResultData();
+        Map<String, Object> condition = new HashMap<>();
+        condition.put("blockFlag", false);
+        if(!startDate.equals("")) {
+            condition.put("startDate", startDate.replace("-", ""));
+        }
+        if(!endDate.equals("")) {
+            condition.put("endDate", endDate.replace("-", ""));
+        }
+        ResultData response = xiaoLuService.searchCallCustomer(condition);
+        result = this.setResponse(response);
+        condition.clear();
+        condition.put("data", response.getData());
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd-HHmmss");
+        String time = format.format(date);
+        condition.put("file", this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
+        condition.put("response", result.getResponseCode());
+        xiaoluExcel.createCallCustomer(condition);
+        result.setFileUrl(this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
+        return result;
+    }
+
+    /**
+     * This method is used to fetch extension.
+     * @return
+     */
+    @CrossOrigin
+    @RequestMapping("/extension")
+    public ResultData fetchExtension() {
+        ResultData result = new ResultData();
+        Map<String, Object> condition = new HashMap<>();
+        condition.put("blockFlag", false);
+        ResultData response = xiaoLuService.fetchExtension(condition);
+        result = this.setResponse(response);
+        condition.clear();
+        condition.put("data", response.getData());
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd-HHmmss");
+        String time = format.format(date);
+        condition.put("file", this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
+        condition.put("response", result.getResponseCode());
+        xiaoluExcel.createExtension(condition);
+        result.setFileUrl(this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
+        return result;
+    }
+
+    /**
+     * This method is used to fetch extension by conditon.
+     * @return
+     */
+    @CrossOrigin
+    @RequestMapping("/extension/search")
+    public ResultData fetchExtensionByConditon(DateForm form) {
+        String startDate = form.getStartDate().trim();
+        String endDate = form.getEndDate().trim();
+        ResultData result = new ResultData();
+        Map<String, Object> condition = new HashMap<>();
+        condition.put("blockFlag", false);
+        if(!startDate.equals("")) {
+            condition.put("startDate", startDate.replace("-", ""));
+        }
+        if(!endDate.equals("")) {
+            condition.put("endDate", endDate.replace("-", ""));
+        }
+        ResultData response = xiaoLuService.searchExtension(condition);
+        result = this.setResponse(response);
+        condition.clear();
+        condition.put("data", response.getData());
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd-HHmmss");
+        String time = format.format(date);
+        condition.put("file", this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
+        condition.put("response", result.getResponseCode());
+        xiaoluExcel.createExtension(condition);
+        result.setFileUrl(this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
+        return result;
+    }
+
+    /**
+     * This method is used to fetch incomingcall.
+     * @return
+     */
+    @CrossOrigin
+    @RequestMapping("/incomingcall")
+    public ResultData fetchIncomingCall() {
+        ResultData result = new ResultData();
+        Map<String, Object> condition = new HashMap<>();
+        condition.put("blockFlag", false);
+        ResultData response = xiaoLuService.fetchIncomingCall(condition);
+        result = this.setResponse(response);
+        condition.clear();
+        condition.put("data", response.getData());
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd-HHmmss");
+        String time = format.format(date);
+        condition.put("file", this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
+        condition.put("response", result.getResponseCode());
+        xiaoluExcel.createIncomingCall(condition);
+        result.setFileUrl(this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
+        return result;
+    }
+
+    /**
+     * This method is used to fetch incomingcall by conditon.
+     * @return
+     */
+    @CrossOrigin
+    @RequestMapping("/incomingcall/search")
+    public ResultData fetchIncomingCallByConditon(DateForm form) {
+        String startDate = form.getStartDate().trim();
+        String endDate = form.getEndDate().trim();
+        ResultData result = new ResultData();
+        Map<String, Object> condition = new HashMap<>();
+        condition.put("blockFlag", false);
+        if(!startDate.equals("")) {
+            condition.put("startDate", startDate.replace("-", ""));
+        }
+        if(!endDate.equals("")) {
+            condition.put("endDate", endDate.replace("-", ""));
+        }
+        ResultData response = xiaoLuService.searchIncomingCall(condition);
+        result = this.setResponse(response);
+        condition.clear();
+        condition.put("data", response.getData());
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd-HHmmss");
+        String time = format.format(date);
+        condition.put("file", this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
+        condition.put("response", result.getResponseCode());
+        xiaoluExcel.createIncomingCall(condition);
         result.setFileUrl(this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
         return result;
     }

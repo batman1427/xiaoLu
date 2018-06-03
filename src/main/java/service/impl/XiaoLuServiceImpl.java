@@ -154,4 +154,118 @@ public class XiaoLuServiceImpl implements XiaoLuService {
         }
         return result;
     }
+
+    @Override
+    public ResultData fetchCallCustomer(Map<String, Object> condition) {
+        ResultData result = new ResultData();
+        ResultData response = xiaoLuDao.queryCallCustomer(condition);
+        if (response.getResponseCode() == ResponseCode.RESPONSE_OK) {
+            result.setResponseCode(ResponseCode.RESPONSE_OK);
+            result.setData(response.getData());
+        }
+        if (response.getResponseCode() == ResponseCode.RESPONSE_NULL) {
+            result.setResponseCode(ResponseCode.RESPONSE_NULL);
+            result.setDescription("No callcustomer record found");
+        }
+        if (response.getResponseCode() == ResponseCode.RESPONSE_ERROR) {
+            result.setResponseCode(ResponseCode.RESPONSE_ERROR);
+            result.setDescription("Fail to fetch callcustomer from database");
+        }
+        return result;
+    }
+
+    @Override
+    public ResultData searchCallCustomer(Map<String, Object> condition) {
+        ResultData result = new ResultData();
+        ResultData response = xiaoLuDao.searchCallCustomer(condition);
+        if (response.getResponseCode() == ResponseCode.RESPONSE_OK) {
+            result.setResponseCode(ResponseCode.RESPONSE_OK);
+            result.setData(response.getData());
+        }
+        if (response.getResponseCode() == ResponseCode.RESPONSE_NULL) {
+            result.setResponseCode(ResponseCode.RESPONSE_NULL);
+            result.setDescription("No callcustomer record found");
+        }
+        if (response.getResponseCode() == ResponseCode.RESPONSE_ERROR) {
+            result.setResponseCode(ResponseCode.RESPONSE_ERROR);
+            result.setDescription("Fail to fetch callcustomer from database");
+        }
+        return result;
+    }
+
+    @Override
+    public ResultData fetchExtension(Map<String, Object> condition) {
+        ResultData result = new ResultData();
+        ResultData response = xiaoLuDao.queryExtension(condition);
+        if (response.getResponseCode() == ResponseCode.RESPONSE_OK) {
+            result.setResponseCode(ResponseCode.RESPONSE_OK);
+            result.setData(response.getData());
+        }
+        if (response.getResponseCode() == ResponseCode.RESPONSE_NULL) {
+            result.setResponseCode(ResponseCode.RESPONSE_NULL);
+            result.setDescription("No extension record found");
+        }
+        if (response.getResponseCode() == ResponseCode.RESPONSE_ERROR) {
+            result.setResponseCode(ResponseCode.RESPONSE_ERROR);
+            result.setDescription("Fail to fetch extension from database");
+        }
+        return result;
+    }
+
+    @Override
+    public ResultData searchExtension(Map<String, Object> condition) {
+        ResultData result = new ResultData();
+        ResultData response = xiaoLuDao.searchExtension(condition);
+        if (response.getResponseCode() == ResponseCode.RESPONSE_OK) {
+            result.setResponseCode(ResponseCode.RESPONSE_OK);
+            result.setData(response.getData());
+        }
+        if (response.getResponseCode() == ResponseCode.RESPONSE_NULL) {
+            result.setResponseCode(ResponseCode.RESPONSE_NULL);
+            result.setDescription("No extension record found");
+        }
+        if (response.getResponseCode() == ResponseCode.RESPONSE_ERROR) {
+            result.setResponseCode(ResponseCode.RESPONSE_ERROR);
+            result.setDescription("Fail to fetch extension from database");
+        }
+        return result;
+    }
+
+    @Override
+    public ResultData fetchIncomingCall(Map<String, Object> condition) {
+        ResultData result = new ResultData();
+        ResultData response = xiaoLuDao.queryIncomingCall(condition);
+        if (response.getResponseCode() == ResponseCode.RESPONSE_OK) {
+            result.setResponseCode(ResponseCode.RESPONSE_OK);
+            result.setData(response.getData());
+        }
+        if (response.getResponseCode() == ResponseCode.RESPONSE_NULL) {
+            result.setResponseCode(ResponseCode.RESPONSE_NULL);
+            result.setDescription("No incomingcall record found");
+        }
+        if (response.getResponseCode() == ResponseCode.RESPONSE_ERROR) {
+            result.setResponseCode(ResponseCode.RESPONSE_ERROR);
+            result.setDescription("Fail to fetch incomingcall from database");
+        }
+        return result;
+    }
+
+    @Override
+    public ResultData searchIncomingCall(Map<String, Object> condition) {
+        ResultData result = new ResultData();
+        ResultData response = xiaoLuDao.searchIncomingCall(condition);
+        if (response.getResponseCode() == ResponseCode.RESPONSE_OK) {
+            result.setResponseCode(ResponseCode.RESPONSE_OK);
+            result.setData(response.getData());
+        }
+        if (response.getResponseCode() == ResponseCode.RESPONSE_NULL) {
+            result.setResponseCode(ResponseCode.RESPONSE_NULL);
+            result.setDescription("No incomingcall record found");
+        }
+        if (response.getResponseCode() == ResponseCode.RESPONSE_ERROR) {
+            result.setResponseCode(ResponseCode.RESPONSE_ERROR);
+            result.setDescription("Fail to fetch incomingcall from database");
+        }
+        return result;
+    }
 }

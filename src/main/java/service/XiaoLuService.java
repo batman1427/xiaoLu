@@ -11,4 +11,16 @@ public interface XiaoLuService {
         ResultData fetchIntermediary(Map<String, Object> condition);
 
         ResultData searchIntermediary(Map<String, Object> condition);
+
+        ResultData fetchCallCustomer(Map<String, Object> condition);
+
+        ResultData searchCallCustomer(Map<String, Object> condition);
+
+        ResultData fetchExtension(Map<String, Object> condition);
+
+        ResultData searchExtension(Map<String, Object> condition);
+
+        ResultData fetchIncomingCall(Map<String, Object> condition);
+
+        ResultData searchIncomingCall(Map<String, Object> condition);
 }

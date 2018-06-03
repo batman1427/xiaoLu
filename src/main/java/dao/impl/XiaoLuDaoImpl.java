@@ -776,4 +776,100 @@ public class XiaoLuDaoImpl extends BaseDao implements XiaoLuDao{
         return result;
     }
 
+    @Override
+    public ResultData queryCallCustomer(Map<String, Object> condition) {
+        ResultData result = new ResultData();
+        try {
+            List<CallCustomer> list = sqlSession.selectList("xiaolu.callcustomer.query", condition);
+            if (list.isEmpty()) {
+                result.setResponseCode(ResponseCode.RESPONSE_NULL);
+            }
+            result.setData(list);
+        } catch (Exception e) {
+            result.setResponseCode(ResponseCode.RESPONSE_ERROR);
+            result.setDescription(e.getMessage());
+        }
+        return result;
+    }
+
+    @Override
+    public ResultData searchCallCustomer(Map<String, Object> condition) {
+        ResultData result = new ResultData();
+        try {
+            List<CallCustomer> list = sqlSession.selectList("xiaolu.callcustomer.search", condition);
+            if (list.isEmpty()) {
+                result.setResponseCode(ResponseCode.RESPONSE_NULL);
+            }
+            result.setData(list);
+        } catch (Exception e) {
+            result.setResponseCode(ResponseCode.RESPONSE_ERROR);
+            result.setDescription(e.getMessage());
+        }
+        return result;
+    }
+
+    @Override
+    public ResultData queryExtension(Map<String, Object> condition) {
+        ResultData result = new ResultData();
+        try {
+            List<Extension> list = sqlSession.selectList("xiaolu.extension.query", condition);
+            if (list.isEmpty()) {
+                result.setResponseCode(ResponseCode.RESPONSE_NULL);
+            }
+            result.setData(list);
+        } catch (Exception e) {
+            result.setResponseCode(ResponseCode.RESPONSE_ERROR);
+            result.setDescription(e.getMessage());
+        }
+        return result;
+    }
+
+    @Override
+    public ResultData searchExtension(Map<String, Object> condition) {
+        ResultData result = new ResultData();
+        try {
+            List<Extension> list = sqlSession.selectList("xiaolu.extension.search", condition);
+            if (list.isEmpty()) {
+                result.setResponseCode(ResponseCode.RESPONSE_NULL);
+            }
+            result.setData(list);
+        } catch (Exception e) {
+            result.setResponseCode(ResponseCode.RESPONSE_ERROR);
+            result.setDescription(e.getMessage());
+        }
+        return result;
+    }
+
+    @Override
+    public ResultData queryIncomingCall(Map<String, Object> condition) {
+        ResultData result = new ResultData();
+        try {
+            List<IncomingCall> list = sqlSession.selectList("xiaolu.incomingcall.query", condition);
+            if (list.isEmpty()) {
+                result.setResponseCode(ResponseCode.RESPONSE_NULL);
+            }
+            result.setData(list);
+        } catch (Exception e) {
+            result.setResponseCode(ResponseCode.RESPONSE_ERROR);
+            result.setDescription(e.getMessage());
+        }
+        return result;
+    }
+
+    @Override
+    public ResultData searchIncomingCall(Map<String, Object> condition) {
+        ResultData result = new ResultData();
+        try {
+            List<IncomingCall> list = sqlSession.selectList("xiaolu.incomingcall.search", condition);
+            if (list.isEmpty()) {
+                result.setResponseCode(ResponseCode.RESPONSE_NULL);
+            }
+            result.setData(list);
+        } catch (Exception e) {
+            result.setResponseCode(ResponseCode.RESPONSE_ERROR);
+            result.setDescription(e.getMessage());
+        }
+        return result;
+    }
+
 }

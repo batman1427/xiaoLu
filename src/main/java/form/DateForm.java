@@ -1,6 +1,6 @@
 package form;
 
-public class IntermediaryForm {
+public class DateForm {
 
     private String startDate;
 

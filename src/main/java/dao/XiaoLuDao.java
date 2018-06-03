@@ -23,4 +23,16 @@ public interface XiaoLuDao {
     ResultData queryIntermediary(Map<String, Object> condition);
 
     ResultData searchIntermediary(Map<String , Object> condition);
+
+    ResultData queryCallCustomer(Map<String, Object> condition);
+
+    ResultData searchCallCustomer(Map<String , Object> condition);
+
+    ResultData queryExtension(Map<String, Object> condition);
+
+    ResultData searchExtension(Map<String , Object> condition);
+
+    ResultData queryIncomingCall(Map<String, Object> condition);
+
+    ResultData searchIncomingCall(Map<String , Object> condition);
 }
