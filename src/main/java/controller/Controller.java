@@ -96,10 +96,10 @@ public class Controller {
         Date date = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd-HHmmss");
         String time = format.format(date);
-        condition.put("file", this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
+        condition.put("file", this.getClass().getClassLoader().getResource("").getPath()+"download/intermediary"+time+".xls");
         condition.put("response", result.getResponseCode());
         xiaoluExcel.createIntermediary(condition);
-        result.setFileUrl(this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
+        result.setFileUrl(this.getClass().getClassLoader().getResource("").getPath()+"download/intermediary"+time+".xls");
         return result;
     }
 
@@ -128,10 +128,10 @@ public class Controller {
         Date date = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd-HHmmss");
         String time = format.format(date);
-        condition.put("file", this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
+        condition.put("file", this.getClass().getClassLoader().getResource("").getPath()+"download/intermediary"+time+".xls");
         condition.put("response", result.getResponseCode());
         xiaoluExcel.createIntermediary(condition);
-        result.setFileUrl(this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
+        result.setFileUrl(this.getClass().getClassLoader().getResource("").getPath()+"download/intermediary"+time+".xls");
         return result;
     }
 
@@ -152,10 +152,10 @@ public class Controller {
         Date date = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd-HHmmss");
         String time = format.format(date);
-        condition.put("file", this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
+        condition.put("file", this.getClass().getClassLoader().getResource("").getPath()+"download/callcustomer"+time+".xls");
         condition.put("response", result.getResponseCode());
         xiaoluExcel.createCallCustomer(condition);
-        result.setFileUrl(this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
+        result.setFileUrl(this.getClass().getClassLoader().getResource("").getPath()+"download/callcustomer"+time+".xls");
         return result;
     }
 
@@ -184,10 +184,10 @@ public class Controller {
         Date date = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd-HHmmss");
         String time = format.format(date);
-        condition.put("file", this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
+        condition.put("file", this.getClass().getClassLoader().getResource("").getPath()+"download/callcustomer"+time+".xls");
         condition.put("response", result.getResponseCode());
         xiaoluExcel.createCallCustomer(condition);
-        result.setFileUrl(this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
+        result.setFileUrl(this.getClass().getClassLoader().getResource("").getPath()+"download/callcustomer"+time+".xls");
         return result;
     }
 
@@ -208,10 +208,10 @@ public class Controller {
         Date date = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd-HHmmss");
         String time = format.format(date);
-        condition.put("file", this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
+        condition.put("file", this.getClass().getClassLoader().getResource("").getPath()+"download/extension"+time+".xls");
         condition.put("response", result.getResponseCode());
         xiaoluExcel.createExtension(condition);
-        result.setFileUrl(this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
+        result.setFileUrl(this.getClass().getClassLoader().getResource("").getPath()+"download/extension"+time+".xls");
         return result;
     }
 
@@ -240,10 +240,10 @@ public class Controller {
         Date date = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd-HHmmss");
         String time = format.format(date);
-        condition.put("file", this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
+        condition.put("file", this.getClass().getClassLoader().getResource("").getPath()+"download/extension"+time+".xls");
         condition.put("response", result.getResponseCode());
         xiaoluExcel.createExtension(condition);
-        result.setFileUrl(this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
+        result.setFileUrl(this.getClass().getClassLoader().getResource("").getPath()+"download/extension"+time+".xls");
         return result;
     }
 
@@ -264,10 +264,10 @@ public class Controller {
         Date date = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd-HHmmss");
         String time = format.format(date);
-        condition.put("file", this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
+        condition.put("file", this.getClass().getClassLoader().getResource("").getPath()+"download/incomingcall"+time+".xls");
         condition.put("response", result.getResponseCode());
         xiaoluExcel.createIncomingCall(condition);
-        result.setFileUrl(this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
+        result.setFileUrl(this.getClass().getClassLoader().getResource("").getPath()+"download/incomingcall"+time+".xls");
         return result;
     }
 
@@ -296,10 +296,10 @@ public class Controller {
         Date date = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd-HHmmss");
         String time = format.format(date);
-        condition.put("file", this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
+        condition.put("file", this.getClass().getClassLoader().getResource("").getPath()+"download/incomingcall"+time+".xls");
         condition.put("response", result.getResponseCode());
         xiaoluExcel.createIncomingCall(condition);
-        result.setFileUrl(this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
+        result.setFileUrl(this.getClass().getClassLoader().getResource("").getPath()+"download/incomingcall"+time+".xls");
         return result;
     }
 
@@ -320,10 +320,10 @@ public class Controller {
         Date date = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd-HHmmss");
         String time = format.format(date);
-        condition.put("file", this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
+        condition.put("file", this.getClass().getClassLoader().getResource("").getPath()+"download/visit"+time+".xls");
         condition.put("response", result.getResponseCode());
         xiaoluExcel.createVisit(condition);
-        result.setFileUrl(this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
+        result.setFileUrl(this.getClass().getClassLoader().getResource("").getPath()+"download/visit"+time+".xls");
         return result;
     }
 
@@ -352,10 +352,10 @@ public class Controller {
         Date date = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd-HHmmss");
         String time = format.format(date);
-        condition.put("file", this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
+        condition.put("file", this.getClass().getClassLoader().getResource("").getPath()+"download/visit"+time+".xls");
         condition.put("response", result.getResponseCode());
         xiaoluExcel.createVisit(condition);
-        result.setFileUrl(this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
+        result.setFileUrl(this.getClass().getClassLoader().getResource("").getPath()+"download/visit"+time+".xls");
         return result;
     }
 
@@ -376,10 +376,10 @@ public class Controller {
         Date date = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd-HHmmss");
         String time = format.format(date);
-        condition.put("file", this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
+        condition.put("file", this.getClass().getClassLoader().getResource("").getPath()+"download/deal"+time+".xls");
         condition.put("response", result.getResponseCode());
         xiaoluExcel.createDeal(condition);
-        result.setFileUrl(this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
+        result.setFileUrl(this.getClass().getClassLoader().getResource("").getPath()+"download/deal"+time+".xls");
         return result;
     }
 
@@ -408,10 +408,34 @@ public class Controller {
         Date date = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd-HHmmss");
         String time = format.format(date);
-        condition.put("file", this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
+        condition.put("file", this.getClass().getClassLoader().getResource("").getPath()+"download/deal"+time+".xls");
         condition.put("response", result.getResponseCode());
         xiaoluExcel.createDeal(condition);
-        result.setFileUrl(this.getClass().getClassLoader().getResource("").getPath()+"download/"+time+".xls");
+        result.setFileUrl(this.getClass().getClassLoader().getResource("").getPath()+"download/deal"+time+".xls");
+        return result;
+    }
+
+    /**
+     * This method is used to fetch summary.
+     * @return
+     */
+    @CrossOrigin
+    @RequestMapping("/summary")
+    public ResultData fetchSummary() {
+        ResultData result = new ResultData();
+        Map<String, Object> condition = new HashMap<>();
+        condition.put("blockFlag", false);
+        ResultData response = xiaoLuService.fetchSummary(condition);
+        result = this.setResponse(response);
+        condition.clear();
+        condition.put("data", response.getData());
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd-HHmmss");
+        String time = format.format(date);
+        condition.put("file", this.getClass().getClassLoader().getResource("").getPath()+"download/summary"+time+".xls");
+        condition.put("response", result.getResponseCode());
+        xiaoluExcel.createSummary(condition);
+        result.setFileUrl(this.getClass().getClassLoader().getResource("").getPath()+"download/summary"+time+".xls");
         return result;
     }
 

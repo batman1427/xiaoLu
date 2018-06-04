@@ -3,6 +3,7 @@ package excel.impl;
 import auxiliary.ResultData;
 import excel.XiaoluExcel;
 import excel.template.*;
+import model.Summary;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -60,6 +61,15 @@ public class XiaoluExcelImpl implements XiaoluExcel {
     public void createDeal(Map<String, Object> condition) {
         try {
             DealExcel.createTable(condition);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void createSummary(Map<String, Object> condition) {
+        try {
+            SummaryExcel.createTable(condition);
         } catch (IOException e) {
             e.printStackTrace();
         }

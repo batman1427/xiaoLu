@@ -43,4 +43,8 @@ public interface XiaoLuDao {
     ResultData queryDeal(Map<String, Object> condition);
 
     ResultData searchDeal(Map<String , Object> condition);
+
+    ResultData querySummary(Map<String, Object> condition);
+
+    ResultData searchSummary(Map<String , Object> condition);
 }

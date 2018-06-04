@@ -15,10 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Repository
 public class XiaoLuDaoImpl extends BaseDao implements XiaoLuDao{
@@ -71,6 +68,7 @@ public class XiaoLuDaoImpl extends BaseDao implements XiaoLuDao{
                             if (list.isEmpty()) {
                                 try {
                                     sqlSession.insert("xiaolu.intermediary.insert", intermediary);
+                                    this.createTel(intermediary.getCustomerName(), intermediary.getCustomerTel());
                                 } catch (Exception e) {
                                     ErrorLog errorLog = new ErrorLog(sheet.getSheetName(), i-1, "数据库插入出错："+e.getMessage());
                                     errorLogList.add(errorLog);
@@ -88,6 +86,7 @@ public class XiaoLuDaoImpl extends BaseDao implements XiaoLuDao{
                                 }
                                 try {
                                     sqlSession.insert("xiaolu.intermediary.insert", intermediary);
+                                    this.createTel(intermediary.getCustomerName(), intermediary.getCustomerTel());
                                 } catch (Exception e) {
                                     ErrorLog errorLog = new ErrorLog(sheet.getSheetName(), i-1, "数据库插入出错："+e.getMessage());
                                     errorLogList.add(errorLog);
@@ -165,6 +164,7 @@ public class XiaoLuDaoImpl extends BaseDao implements XiaoLuDao{
                             if (list.isEmpty()) {
                                 try {
                                     sqlSession.insert("xiaolu.callcustomer.insert", callCustomer);
+                                    this.createTel(callCustomer.getCustomerName(), callCustomer.getCustomerTel());
                                 } catch (Exception e) {
                                     ErrorLog errorLog = new ErrorLog(sheet.getSheetName(), i-1, "数据库插入出错："+e.getMessage());
                                     errorLogList.add(errorLog);
@@ -182,6 +182,7 @@ public class XiaoLuDaoImpl extends BaseDao implements XiaoLuDao{
                                 }
                                 try {
                                     sqlSession.insert("xiaolu.callcustomer.insert", callCustomer);
+                                    this.createTel(callCustomer.getCustomerName(), callCustomer.getCustomerTel());
                                 } catch (Exception e) {
                                     ErrorLog errorLog = new ErrorLog(sheet.getSheetName(), i-1, "数据库插入出错："+e.getMessage());
                                     errorLogList.add(errorLog);
@@ -253,6 +254,7 @@ public class XiaoLuDaoImpl extends BaseDao implements XiaoLuDao{
                             if (list.isEmpty()) {
                                 try {
                                     sqlSession.insert("xiaolu.extension.insert", extension);
+                                    this.createTel(extension.getCustomerName(), extension.getCustomerTel());
                                 } catch (Exception e) {
                                     ErrorLog errorLog = new ErrorLog(sheet.getSheetName(), i-1, "数据库插入出错："+e.getMessage());
                                     errorLogList.add(errorLog);
@@ -270,6 +272,7 @@ public class XiaoLuDaoImpl extends BaseDao implements XiaoLuDao{
                                 }
                                 try {
                                     sqlSession.insert("xiaolu.extension.insert", extension);
+                                    this.createTel(extension.getCustomerName(), extension.getCustomerTel());
                                 } catch (Exception e) {
                                     ErrorLog errorLog = new ErrorLog(sheet.getSheetName(), i-1, "数据库插入出错："+e.getMessage());
                                     errorLogList.add(errorLog);
@@ -346,6 +349,7 @@ public class XiaoLuDaoImpl extends BaseDao implements XiaoLuDao{
                             if (list.isEmpty()) {
                                 try {
                                     sqlSession.insert("xiaolu.incomingcall.insert", incomingCall);
+                                    this.createTel(incomingCall.getCustomerName(), incomingCall.getCustomerTel());
                                 } catch (Exception e) {
                                     ErrorLog errorLog = new ErrorLog(sheet.getSheetName(), i-1, "数据库插入出错："+e.getMessage());
                                     errorLogList.add(errorLog);
@@ -363,6 +367,7 @@ public class XiaoLuDaoImpl extends BaseDao implements XiaoLuDao{
                                 }
                                 try {
                                     sqlSession.insert("xiaolu.incomingcall.insert", incomingCall);
+                                    this.createTel(incomingCall.getCustomerName(), incomingCall.getCustomerTel());
                                 } catch (Exception e) {
                                     ErrorLog errorLog = new ErrorLog(sheet.getSheetName(), i-1, "数据库插入出错："+e.getMessage());
                                     errorLogList.add(errorLog);
@@ -452,6 +457,7 @@ public class XiaoLuDaoImpl extends BaseDao implements XiaoLuDao{
                             if (list.isEmpty()) {
                                 try {
                                     sqlSession.insert("xiaolu.visit.insert", visit);
+                                    this.createTel(visit.getCustomerName(), visit.getCustomerTel());
                                 } catch (Exception e) {
                                     ErrorLog errorLog = new ErrorLog(sheet.getSheetName(), i, "数据库插入出错："+e.getMessage());
                                     errorLogList.add(errorLog);
@@ -469,6 +475,7 @@ public class XiaoLuDaoImpl extends BaseDao implements XiaoLuDao{
                                 }
                                 try {
                                     sqlSession.insert("xiaolu.visit.insert", visit);
+                                    this.createTel(visit.getCustomerName(), visit.getCustomerTel());
                                 } catch (Exception e) {
                                     ErrorLog errorLog = new ErrorLog(sheet.getSheetName(), i, "数据库插入出错："+e.getMessage());
                                     errorLogList.add(errorLog);
@@ -691,6 +698,7 @@ public class XiaoLuDaoImpl extends BaseDao implements XiaoLuDao{
                             if (list.isEmpty()) {
                                 try {
                                     sqlSession.insert("xiaolu.deal.insert", deal);
+                                    this.createTel(deal.getCustomerName(), deal.getCustomerTel());
                                 } catch (Exception e) {
                                     ErrorLog errorLog = new ErrorLog(sheet.getSheetName(), i, "数据库插入出错："+e.getMessage());
                                     errorLogList.add(errorLog);
@@ -708,6 +716,7 @@ public class XiaoLuDaoImpl extends BaseDao implements XiaoLuDao{
                                 }
                                 try {
                                     sqlSession.insert("xiaolu.deal.insert", deal);
+                                    this.createTel(deal.getCustomerName(), deal.getCustomerTel());
                                 } catch (Exception e) {
                                     ErrorLog errorLog = new ErrorLog(sheet.getSheetName(), i, "数据库插入出错："+e.getMessage());
                                     errorLogList.add(errorLog);
@@ -934,6 +943,119 @@ public class XiaoLuDaoImpl extends BaseDao implements XiaoLuDao{
             result.setDescription(e.getMessage());
         }
         return result;
+    }
+
+    public void createTel(String telName, String telContent){
+        Map<String, Object> condition = new HashMap<String, Object>();
+        condition.put("blockFlag", false);
+        condition.put("telName", telName);
+        condition.put("telContent", telContent);
+        List<Tel> list = sqlSession.selectList("xiaolu.tel.query", condition);
+        if (list.isEmpty()) {
+            Tel tel = new Tel(IDGenerator.generate("TEL"), telName, telContent);
+            sqlSession.insert("xiaolu.tel.insert", tel);
+            System.out.println("新增一条用户记录;");
+        }
+    }
+
+    @Override
+    public ResultData querySummary(Map<String, Object> condition) {
+        ResultData result = new ResultData();
+        try {
+            List<Summary> summaryList = new ArrayList<Summary>();
+            List<Tel> list = sqlSession.selectList("xiaolu.tel.query", condition);
+            if (list.isEmpty()) {
+                result.setResponseCode(ResponseCode.RESPONSE_NULL);
+            }else{
+                for(int i=0;i<list.size();i++){
+                    condition.clear();
+                    condition.put("customerName", list.get(i).getTelName());
+                    condition.put("customerTel", list.get(i).getTelContent());
+                    condition.put("blockFlag", false);
+                    Summary summary = new Summary(list.get(i).getTelName(), list.get(i).getTelContent());
+                    List<Intermediary> intermediaryList = sqlSession.selectList("xiaolu.intermediary.query", condition);
+                    if(!intermediaryList.isEmpty()){
+                        summary.setIntermediaryReportTime(String.valueOf(intermediaryList.get(0).getReportTime()));
+                        summary.setIntermediaryReportBuilding(intermediaryList.get(0).getReportBuilding());
+                        summary.setIntermediaryIntentionLevel(intermediaryList.get(0).getIntentionLevel());
+                        summary.setIntermediaryVisitTime(intermediaryList.get(0).getVisitTime());
+                        summary.setIntermediaryVisitBuilding(intermediaryList.get(0).getVisitBuilding());
+                        summary.setIntermediaryCustomerSituation(intermediaryList.get(0).getCustomerSituation());
+                        summary.setIntermediaryDealTime(intermediaryList.get(0).getDealTime());
+                        summary.setIntermediaryDealBuilding(intermediaryList.get(0).getDealBuilding());
+                        summary.setIntermediaryDealRoomnum(intermediaryList.get(0).getDealRoomnum());
+                    }
+                    List<CallCustomer> callCustomerList = sqlSession.selectList("xiaolu.callcustomer.query", condition);
+                    if(!callCustomerList.isEmpty()){
+                        summary.setCallCustomerDatasourceArea(callCustomerList.get(0).getDatasourceArea());
+                        summary.setCallCustomerDatasourceBuilding(callCustomerList.get(0).getDatasourceBuilding());
+                        summary.setCallCustomerCallTime(String.valueOf(callCustomerList.get(0).getCallTime()));
+                        summary.setCallCustomerCallSalesman(callCustomerList.get(0).getCallSalesman());
+                        summary.setCallCustomerIntentionLevel(callCustomerList.get(0).getIntentionLevel());
+                        summary.setCallCustomerIntentionBuilding(callCustomerList.get(0).getIntentionBuilding());
+                        summary.setCallCustomerVisitTime(callCustomerList.get(0).getVisitTime());;
+                        summary.setCallCustomerVisitBuilding(callCustomerList.get(0).getVisitBuilding());
+                        summary.setCallCustomerCustomerSituation(callCustomerList.get(0).getCustomerSituation());
+                        summary.setCallCustomerDealTime(callCustomerList.get(0).getDealTime());
+                    }
+                    List<Extension> extensionList = sqlSession.selectList("xiaolu.extension.query", condition);
+                    if(!extensionList.isEmpty()){
+                        summary.setExtensionExtensionTime(String.valueOf(extensionList.get(0).getExtensionTime()));
+                        summary.setExtensionRealtyConsultant(extensionList.get(0).getRealtyConsultant());
+                        summary.setExtensionVisitTime(extensionList.get(0).getVisitTime());
+                        summary.setExtensionCustomerSituation(extensionList.get(0).getCustomerSituation());
+                        summary.setExtensionDealTime(extensionList.get(0).getDealTime());
+                        summary.setExtensionDealBuilding(extensionList.get(0).getDealRoomnum());
+                        summary.setExtensionDealRoomnum(extensionList.get(0).getDealRoomnum());
+                    }
+                    List<IncomingCall> incomingCallList = sqlSession.selectList("xiaolu.incomingcall.query", condition);
+                    if(!incomingCallList.isEmpty()){
+                        summary.setIncomingCallCallTime(String.valueOf(incomingCallList.get(0).getCallTime()));
+                        summary.setIncomingCallRealtyPurpose(incomingCallList.get(0).getRealtyPurpose());
+                        summary.setIncomingCallDemandArea(incomingCallList.get(0).getDemandArea());
+                        summary.setIncomingCallHouseType(incomingCallList.get(0).getHouseType());
+                        summary.setIncomingCallResidentialZone(incomingCallList.get(0).getResidentialZone());
+                        summary.setIncomingCallAcceptPrice(incomingCallList.get(0).getAcceptPrice());
+                        summary.setIncomingCallVisitTime(incomingCallList.get(0).getVisitTime());
+                        summary.setIncomingCallCustomerSituation(incomingCallList.get(0).getCustomerSituation());
+                        summary.setIncomingCallDealTime(incomingCallList.get(0).getDealTime());
+                        summary.setIncomingCallDealBuilding(incomingCallList.get(0).getDealBuilding());
+                        summary.setIncomingCallDealRoomnum(incomingCallList.get(0).getDealRoomnum());
+                        summary.setIncomingCallSalesman(incomingCallList.get(0).getSalesman());
+                    }
+                    List<Visit> visitList = sqlSession.selectList("xiaolu.visit.query", condition);
+                    if(!visitList.isEmpty()){
+                        summary.setVisitVisitTime(String.valueOf(visitList.get(0).getVisitTime()));
+                        summary.setVisitIntentionalArea(visitList.get(0).getIntentionalArea());
+                        summary.setVisitAcceptPrice(visitList.get(0).getAcceptPrice());
+                        summary.setVisitResidentialZone(visitList.get(0).getResidentialZone());
+                        summary.setVisitRealtyPurpose(visitList.get(0).getRealtyPurpose());
+                        summary.setVisitCustomerType(visitList.get(0).getCustomerType());
+                        summary.setVisitRealtyConsultant(visitList.get(0).getRealtyConsultant());
+                        summary.setVisitDealTime(visitList.get(0).getDealTime());
+                        summary.setVisitDealRoomnum(visitList.get(0).getDealRoomnum());
+                    }
+                    List<Deal> dealList = sqlSession.selectList("xiaolu.deal.query", condition);
+                    if(!dealList.isEmpty()){
+                        summary.setDealSubscriptionTime(String.valueOf(dealList.get(0).getSubscriptionTime()));
+                        summary.setDealAccessKnown(dealList.get(0).getAccessKnown());
+                        summary.setDealReferee(dealList.get(0).getReferee());
+                        summary.setDealRefereeTel(dealList.get(0).getRefereeTel());
+                    }
+                    summaryList.add(summary);
+                }
+            }
+            result.setData(summaryList);
+        } catch (Exception e) {
+            result.setResponseCode(ResponseCode.RESPONSE_ERROR);
+            result.setDescription(e.getMessage());
+        }
+        return result;
+    }
+
+    @Override
+    public ResultData searchSummary(Map<String, Object> condition) {
+        return null;
     }
 
 }

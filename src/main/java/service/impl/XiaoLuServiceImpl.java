@@ -344,4 +344,30 @@ public class XiaoLuServiceImpl implements XiaoLuService {
         }
         return result;
     }
+
+    @Override
+    public ResultData fetchSummary(Map<String, Object> condition) {
+        ResultData result = new ResultData();
+        ResultData response = xiaoLuDao.querySummary(condition);
+        if (response.getResponseCode() == ResponseCode.RESPONSE_OK) {
+            result.setResponseCode(ResponseCode.RESPONSE_OK);
+            result.setData(response.getData());
+        }
+        if (response.getResponseCode() == ResponseCode.RESPONSE_NULL) {
+            result.setResponseCode(ResponseCode.RESPONSE_NULL);
+            result.setDescription("No summary record found");
+        }
+        if (response.getResponseCode() == ResponseCode.RESPONSE_ERROR) {
+            result.setResponseCode(ResponseCode.RESPONSE_ERROR);
+            result.setDescription("Fail to fetch summary from database");
+        }
+        return result;
+    }
+
+    @Override
+    public ResultData searchSummary(Map<String, Object> condition) {
+        return null;
+    }
+
+
 }

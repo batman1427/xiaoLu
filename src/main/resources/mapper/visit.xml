@@ -43,6 +43,9 @@
         <if test="customerTel != null">
             AND customer_tel = #{customerTel}
         </if>
+        <if test="customerName != null">
+            AND customer_name = #{customerName}
+        </if>
         <if test="blockFlag != null">
             AND block_flag = #{blockFlag}
         </if>

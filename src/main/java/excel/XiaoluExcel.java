@@ -16,4 +16,6 @@ public interface XiaoluExcel {
 
     void createDeal(Map<String, Object> condition);
 
+    void createSummary(Map<String, Object> condition);
+
 }

@@ -10,5 +10,6 @@
         <mapper resource="mapper/incomingcall.xml" />
         <mapper resource="mapper/visit.xml" />
         <mapper resource="mapper/deal.xml" />
+        <mapper resource="mapper/tel.xml" />
     </mappers>
 </configuration>
