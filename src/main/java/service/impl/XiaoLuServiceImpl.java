@@ -4,6 +4,7 @@ import auxiliary.ErrorLog;
 import auxiliary.ResponseCode;
 import auxiliary.ResultData;
 import dao.XiaoLuDao;
+import model.Summary;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -368,9 +369,135 @@ public class XiaoLuServiceImpl implements XiaoLuService {
     }
 
     @Override
-    public ResultData searchSummary(Map<String, Object> condition) {
-        return null;
+    public ResultData screenSummary(Map<String, Object> condition) {
+        ResultData result = new ResultData();
+        List<Summary> ordinaryList = (List<Summary>)condition.get("data");
+        List<Summary> finalList = new ArrayList<Summary>();
+        String callStartDate = (String) condition.get("callStartDate");
+        String callEndDate = (String) condition.get("callEndDate");
+        String visitStartDate = (String) condition.get("visitStartDate");
+        String visitEndDate = (String) condition.get("visitEndDate");
+        String dealStartDate = (String) condition.get("dealStartDate");
+        String dealEndDate = (String) condition.get("dealEndDate");
+        String smallarea = (String) condition.get("smallarea");
+        String bigarea = (String) condition.get("bigarea");
+        String lowprice = (String) condition.get("lowprice");
+        String highprice = (String) condition.get("highprice");
+        String area_list = (String) condition.get("area_list");
+        String accesspath_list = (String) condition.get("accesspath_list");
+        for(Summary summary: ordinaryList){
+            if(!callStartDate.equals("")) {
+                if(summary.getIncomingCallCallTime().length()>0){
+                    if (Integer.valueOf(summary.getIncomingCallCallTime()) < Integer.valueOf(callStartDate.replace("-", ""))) {
+                        continue;
+                    }
+                }else{
+                    continue;
+                }
+            }
+            if(!callEndDate.equals("")) {
+                if(summary.getIncomingCallCallTime().length()>0){
+                    if(Integer.valueOf(summary.getIncomingCallCallTime())>Integer.valueOf(callEndDate.replace("-", ""))){
+                        continue;
+                    }
+                }else{
+                    continue;
+                }
+            }
+            if(!visitStartDate.equals("")) {
+                if(summary.getVisitVisitTime().length()>0){
+                    if(Integer.valueOf(summary.getVisitVisitTime())<Integer.valueOf(visitStartDate.replace("-", ""))){
+                        continue;
+                    }
+                }else{
+                    continue;
+                }
+            }
+            if(!visitEndDate.equals("")) {
+                if(summary.getVisitVisitTime().length()>0){
+                    if(Integer.valueOf(summary.getVisitVisitTime())>Integer.valueOf(visitEndDate.replace("-", ""))){
+                        continue;
+                    }
+                }else{
+                    continue;
+                }
+            }
+            if(!dealStartDate.equals("")) {
+                if(summary.getDealSubscriptionTime().length()>0){
+                    if(Integer.valueOf(summary.getDealSubscriptionTime())<Integer.valueOf(dealStartDate.replace("-", ""))){
+                        continue;
+                    }
+                }else{
+                    continue;
+                }
+            }
+            if(!dealEndDate.equals("")) {
+                if(summary.getDealSubscriptionTime().length()>0){
+                    if(Integer.valueOf(summary.getDealSubscriptionTime())>Integer.valueOf(dealEndDate.replace("-", ""))){
+                        continue;
+                    }
+                }else{
+                    continue;
+                }
+            }
+            try {
+                if (!smallarea.equals("")){
+                    if(summary.getVisitIntentionalArea().length() > 0){
+                        if(Double.valueOf(summary.getVisitIntentionalArea())<Double.valueOf(smallarea)){
+                            continue;
+                        }
+                    }else{
+                        continue;
+                    }
+                }
+                if (!bigarea.equals("")){
+                    if(summary.getVisitIntentionalArea().length() > 0){
+                        if(Double.valueOf(summary.getVisitIntentionalArea())>Double.valueOf(bigarea)){
+                            continue;
+                        }
+                    }else{
+                        continue;
+                    }
+                }
+                if (!lowprice.equals("")){
+                    if(summary.getVisitAcceptPrice().length() > 0){
+                        if(Double.valueOf(summary.getVisitAcceptPrice())<Double.valueOf(lowprice)){
+                            continue;
+                        }
+                    }else{
+                        continue;
+                    }
+                }
+                if (!highprice.equals("")){
+                    if(summary.getVisitAcceptPrice().length() > 0){
+                        if(Double.valueOf(summary.getVisitAcceptPrice())>Double.valueOf(highprice)){
+                            continue;
+                        }
+                    }else{
+                        continue;
+                    }
+                }
+            }catch (Exception e){
+                continue;
+            }
+            if (summary.getVisitResidentialZone().contains(area_list)||area_list.contains("请选择区域")){
+            }else{
+                continue;
+            }
+            if (summary.getDealAccessKnown().contains(accesspath_list)||accesspath_list.contains("获知途径")){
+            }else{
+                continue;
+            }
+            finalList.add(summary);
+        }
+        if (!finalList.isEmpty()) {
+            result.setResponseCode(ResponseCode.RESPONSE_OK);
+            result.setData(finalList);
+        }else{
+            result.setResponseCode(ResponseCode.RESPONSE_NULL);
+            result.setDescription("No summary record found");
+        }
+        return result;
     }
-
 
 }

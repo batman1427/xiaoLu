@@ -34,5 +34,5 @@ public interface XiaoLuService {
 
         ResultData fetchSummary(Map<String, Object> condition);
 
-        ResultData searchSummary(Map<String, Object> condition);
+        ResultData screenSummary(Map<String, Object> condition);
 }

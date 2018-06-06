@@ -7,6 +7,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import excel.XiaoluExcel;
 import form.DateForm;
+import form.SummaryForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -426,6 +427,59 @@ public class Controller {
         Map<String, Object> condition = new HashMap<>();
         condition.put("blockFlag", false);
         ResultData response = xiaoLuService.fetchSummary(condition);
+        result = this.setResponse(response);
+        condition.clear();
+        condition.put("data", response.getData());
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd-HHmmss");
+        String time = format.format(date);
+        condition.put("file", this.getClass().getClassLoader().getResource("").getPath()+"download/summary"+time+".xls");
+        condition.put("response", result.getResponseCode());
+        xiaoluExcel.createSummary(condition);
+        result.setFileUrl(this.getClass().getClassLoader().getResource("").getPath()+"download/summary"+time+".xls");
+        return result;
+    }
+
+    /**
+     * This method is used to fetch summary by conditon.
+     * @return
+     */
+    @CrossOrigin
+    @RequestMapping("/summary/search")
+    public ResultData fetchSummaryByConditon(SummaryForm form) {
+        ResultData result = new ResultData();
+        Map<String, Object> condition = new HashMap<>();
+        condition.put("blockFlag", false);
+        ResultData response = xiaoLuService.fetchSummary(condition);
+        if(response.getResponseCode() == ResponseCode.RESPONSE_OK){
+            condition.clear();
+            condition.put("data", response.getData());
+            String callStartDate = form.getCallStartDate().trim();
+            String callEndDate = form.getCallEndDate().trim();
+            String visitStartDate = form.getVisitStartDate().trim();
+            String visitEndDate = form.getVisitEndDate().trim();
+            String dealStartDate = form.getDealStartDate().trim();
+            String dealEndDate = form.getDealEndDate().trim();
+            String smallarea = form.getSmallarea().trim();
+            String bigarea = form.getBigarea().trim();
+            String lowprice = form.getLowprice().trim();
+            String highprice = form.getHighprice().trim();
+            String area_list = form.getArea_list().trim();
+            String accesspath_list = form.getAccesspath_list().trim();
+            condition.put("callStartDate", callStartDate);
+            condition.put("callEndDate", callEndDate);
+            condition.put("visitStartDate", visitStartDate);
+            condition.put("visitEndDate", visitEndDate);
+            condition.put("dealStartDate", dealStartDate);
+            condition.put("dealEndDate", dealEndDate);
+            condition.put("smallarea", smallarea);
+            condition.put("bigarea", bigarea);
+            condition.put("lowprice", lowprice);
+            condition.put("highprice", highprice);
+            condition.put("area_list", area_list);
+            condition.put("accesspath_list", accesspath_list);
+            response = xiaoLuService.screenSummary(condition);
+        }
         result = this.setResponse(response);
         condition.clear();
         condition.put("data", response.getData());

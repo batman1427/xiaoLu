@@ -1242,9 +1242,4 @@ public class XiaoLuDaoImpl extends BaseDao implements XiaoLuDao{
         return result;
     }
 
-    @Override
-    public ResultData searchSummary(Map<String, Object> condition) {
-        return null;
-    }
-
 }
