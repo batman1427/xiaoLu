@@ -68,4 +68,34 @@
         </if>
         WHERE customer_tel = #{customerTel} AND report_time = #{reportTime}
     </update>
+
+    <update id="summaryupdate" parameterType="java.util.Map">
+        UPDATE xiaolu_excel.excel_intermediary
+        SET
+        <if test="reportBuilding != null">
+            report_building = #{reportBuilding},
+        </if>
+        <if test="intentionLevel != null">
+            intention_level = #{intentionLevel},
+        </if>
+        <if test="visitTime != null">
+            visit_time = #{visitTime},
+        </if>
+        <if test="visitBuilding != null">
+            visit_building = #{visitBuilding},
+        </if>
+        <if test="customerSituation != null">
+            customer_situation = #{customerSituation},
+        </if>
+        <if test="dealTime != null">
+            deal_time = #{dealTime},
+        </if>
+        <if test="dealBuilding != null">
+            deal_building = #{dealBuilding},
+        </if>
+        <if test="dealRoomnum != null">
+            deal_roomnum = #{dealRoomnum}
+        </if>
+        WHERE report_time = #{reportTime} AND customer_tel = #{customerTel} AND block_flag = #{blockFlag}
+    </update>
 </mapper>

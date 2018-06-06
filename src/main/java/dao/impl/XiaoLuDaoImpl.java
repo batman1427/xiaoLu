@@ -742,6 +742,195 @@ public class XiaoLuDaoImpl extends BaseDao implements XiaoLuDao{
         return result;
     }
 
+    @Transactional
+    @Override
+    public ResultData createSummary(Map<String, Object> condition) {
+        ResultData result = new ResultData();
+        List<ErrorLog> errorLogList = new ArrayList<ErrorLog>();
+        Sheet sheet = (Sheet) condition.get("sheet");
+        Workbook workbook = (Workbook) condition.get("workbook");
+        for(int i=1;i<sheet.getPhysicalNumberOfRows();i++){
+            System.out.println("正在处理表"+sheet.getSheetName()+"的第"+i+"条记录;");
+            if(sheet.getRow(i) != null && sheet.getRow(i).getFirstCellNum()==0 && sheet.getRow(i).getCell(0).toString().trim().length() > 0){
+                Row row = sheet.getRow(i);
+                String customerName = row.getCell(1) == null ? "" : row.getCell(1).toString().trim();
+                String customerTel = row.getCell(2) == null ? "" : row.getCell(2).toString().trim();
+                String intermediaryReportTime = row.getCell(3) == null ? "" : row.getCell(3).toString().trim();
+                String intermediaryReportBuilding = row.getCell(4) == null ? "" : row.getCell(4).toString().trim();
+                String intermediaryIntentionLevel = row.getCell(5) == null ? "" : row.getCell(5).toString().trim();
+                String intermediaryVisitTime = row.getCell(6) == null ? "" : row.getCell(6).toString().trim();
+                String intermediaryVisitBuilding = row.getCell(7) == null ? "" : row.getCell(7).toString().trim();
+                String intermediaryCustomerSituation = row.getCell(8) == null ? "" : row.getCell(8).toString().trim();
+                String intermediaryDealTime = row.getCell(9) == null ? "" : row.getCell(9).toString().trim();
+                String intermediaryDealBuilding = row.getCell(10) == null ? "" : row.getCell(10).toString().trim();
+                String intermediaryDealRoomnum = row.getCell(11) == null ? "" : row.getCell(11).toString().trim();
+                String callCustomerDatasourceArea = row.getCell(12) == null ? "" : row.getCell(12).toString().trim();
+                String callCustomerDatasourceBuilding = row.getCell(13) == null ? "" : row.getCell(13).toString().trim();
+                String callCustomerCallTime = row.getCell(14) == null ? "" : row.getCell(14).toString().trim();
+                String callCustomerCallSalesman = row.getCell(15) == null ? "" : row.getCell(15).toString().trim();
+                String callCustomerIntentionLevel = row.getCell(16) == null ? "" : row.getCell(16).toString().trim();
+                String callCustomerIntentionBuilding = row.getCell(17) == null ? "" : row.getCell(17).toString().trim();
+                String callCustomerVisitTime = row.getCell(18) == null ? "" : row.getCell(18).toString().trim();
+                String callCustomerVisitBuilding = row.getCell(19) == null ? "" : row.getCell(19).toString().trim();
+                String callCustomerCustomerSituation = row.getCell(20) == null ? "" : row.getCell(20).toString().trim();
+                String callCustomerDealTime = row.getCell(21) == null ? "" : row.getCell(21).toString().trim();
+                String extensionExtensionTime = row.getCell(22) == null ? "" : row.getCell(22).toString().trim();
+                String extensionRealtyConsultant = row.getCell(23) == null ? "" : row.getCell(23).toString().trim();
+                String extensionVisitTime = row.getCell(24) == null ? "" : row.getCell(24).toString().trim();
+                String extensionCustomerSituation = row.getCell(25) == null ? "" : row.getCell(25).toString().trim();
+                String extensionDealTime = row.getCell(26) == null ? "" : row.getCell(26).toString().trim();
+                String extensionDealBuilding = row.getCell(27) == null ? "" : row.getCell(27).toString().trim();
+                String extensionDealRoomnum = row.getCell(28) == null ? "" : row.getCell(28).toString().trim();
+                String incomingCallCallTime = row.getCell(29) == null ? "" : row.getCell(29).toString().trim();
+                String incomingCallRealtyPurpose = row.getCell(30) == null ? "" : row.getCell(30).toString().trim();
+                String incomingCallDemandArea = row.getCell(31) == null ? "" : row.getCell(31).toString().trim();
+                String incomingCallHouseType = row.getCell(32) == null ? "" : row.getCell(32).toString().trim();
+                String incomingCallResidentialZone = row.getCell(33) == null ? "" : row.getCell(33).toString().trim();
+                String incomingCallAcceptPrice = row.getCell(34) == null ? "" : row.getCell(34).toString().trim();
+                String incomingCallVisitTime = row.getCell(35) == null ? "" : row.getCell(35).toString().trim();
+                String incomingCallCustomerSituation = row.getCell(36) == null ? "" : row.getCell(36).toString().trim();
+                String incomingCallDealTime = row.getCell(37) == null ? "" : row.getCell(37).toString().trim();
+                String incomingCallDealBuilding = row.getCell(38) == null ? "" : row.getCell(38).toString().trim();
+                String incomingCallDealRoomnum = row.getCell(39) == null ? "" : row.getCell(39).toString().trim();
+                String incomingCallSalesman = row.getCell(40) == null ? "" : row.getCell(40).toString().trim();
+                String visitVisitTime = row.getCell(41) == null ? "" : row.getCell(41).toString().trim();
+                String visitIntentionalArea = row.getCell(42) == null ? "" : row.getCell(42).toString().trim();
+                String visitAcceptPrice = row.getCell(43) == null ? "" : row.getCell(43).toString().trim();
+                String visitResidentialZone = row.getCell(44) == null ? "" : row.getCell(44).toString().trim();
+                String visitRealtyPurpose = row.getCell(45) == null ? "" : row.getCell(45).toString().trim();
+                String visitCustomerType = row.getCell(46) == null ? "" : row.getCell(46).toString().trim();
+                String visitRealtyConsultant = row.getCell(47) == null ? "" : row.getCell(47).toString().trim();
+                String visitDealTime = row.getCell(48) == null ? "" : row.getCell(48).toString().trim();
+                String visitDealRoomnum = row.getCell(49) == null ? "" : row.getCell(49).toString().trim();
+                String dealSubscriptionTime = row.getCell(50) == null ? "" : row.getCell(50).toString().trim();
+                String dealAccessKnown = row.getCell(51) == null ? "" : row.getCell(51).toString().trim();
+                String dealReferee = row.getCell(52) == null ? "" : row.getCell(52).toString().trim();
+                String dealRefereeTel = row.getCell(53) == null ? "" : row.getCell(53).toString().trim();
+                if(intermediaryReportTime.length()>0){
+                    condition.clear();
+                    condition.put("blockFlag", false);
+                    condition.put("customerTel", customerTel);
+                    condition.put("reportTime", Integer.valueOf(intermediaryReportTime.replace("/", "")));
+                    condition.put("reportBuilding", intermediaryReportBuilding);
+                    condition.put("intentionLevel", intermediaryIntentionLevel);
+                    condition.put("visitTime", intermediaryVisitTime);
+                    condition.put("visitBuilding", intermediaryVisitBuilding);
+                    condition.put("customerSituation", intermediaryCustomerSituation);
+                    condition.put("dealTime", intermediaryDealTime);
+                    condition.put("dealBuilding", intermediaryDealBuilding);
+                    condition.put("dealRoomnum", intermediaryDealRoomnum);
+                    try {
+                        sqlSession.update("xiaolu.intermediary.summaryupdate", condition);
+                    } catch (Exception e) {
+                        ErrorLog errorLog = new ErrorLog(sheet.getSheetName(), i, "中介表更新出错："+e.getMessage());
+                        errorLogList.add(errorLog);
+                    }
+                }
+                if(callCustomerCallTime.length()>0) {
+                    condition.clear();
+                    condition.put("blockFlag", false);
+                    condition.put("customerTel", customerTel);
+                    condition.put("datasourceArea", callCustomerDatasourceArea);
+                    condition.put("datasourceBuilding", callCustomerDatasourceBuilding);
+                    condition.put("callTime", Integer.valueOf(callCustomerCallTime.replace("/", "")));
+                    condition.put("callSalesman", callCustomerCallSalesman);
+                    condition.put("intentionLevel", callCustomerIntentionLevel);
+                    condition.put("intentionBuilding", callCustomerIntentionBuilding);
+                    condition.put("visitTime", callCustomerVisitTime);
+                    condition.put("visitBuilding", callCustomerVisitBuilding);
+                    condition.put("customerSituation", callCustomerCustomerSituation);
+                    condition.put("dealTime", callCustomerDealTime);
+                    try {
+                        sqlSession.update("xiaolu.callcustomer.summaryupdate", condition);
+                    } catch (Exception e) {
+                        ErrorLog errorLog = new ErrorLog(sheet.getSheetName(), i, "CALL客表更新出错：" + e.getMessage());
+                        errorLogList.add(errorLog);
+                    }
+                }
+                if(extensionExtensionTime.length()>0) {
+                    condition.clear();
+                    condition.put("blockFlag", false);
+                    condition.put("customerTel", customerTel);
+                    condition.put("extensionTime", Integer.valueOf(extensionExtensionTime.replace("/", "")));
+                    condition.put("realtyConsultant", extensionRealtyConsultant);
+                    condition.put("visitTime", extensionVisitTime);
+                    condition.put("customerSituation", extensionCustomerSituation);
+                    condition.put("dealTime", extensionDealTime);
+                    condition.put("dealBuilding", extensionDealBuilding);
+                    condition.put("dealRoomnum", extensionDealRoomnum);
+                    try {
+                        sqlSession.update("xiaolu.extension.summaryupdate", condition);
+                    } catch (Exception e) {
+                        ErrorLog errorLog = new ErrorLog(sheet.getSheetName(), i, "外拓表更新出错：" + e.getMessage());
+                        errorLogList.add(errorLog);
+                    }
+                }
+                if(incomingCallCallTime.length()>0) {
+                    condition.clear();
+                    condition.put("blockFlag", false);
+                    condition.put("customerTel", customerTel);
+                    condition.put("callTime", Integer.valueOf(incomingCallCallTime.replace("/", "")));
+                    condition.put("realtyPurpose", incomingCallRealtyPurpose);
+                    condition.put("demandArea", incomingCallDemandArea);
+                    condition.put("houseType", incomingCallHouseType);
+                    condition.put("residentialZone", incomingCallResidentialZone);
+                    condition.put("acceptPrice", incomingCallAcceptPrice);
+                    condition.put("visitTime", incomingCallVisitTime);
+                    condition.put("customerSituation", incomingCallCustomerSituation);
+                    condition.put("dealTime", incomingCallDealTime);
+                    condition.put("dealBuilding", incomingCallDealBuilding);
+                    condition.put("dealRoomnum", incomingCallDealRoomnum);
+                    condition.put("salesman", incomingCallSalesman);
+                    try {
+                        sqlSession.update("xiaolu.incomingcall.summaryupdate", condition);
+                    } catch (Exception e) {
+                        ErrorLog errorLog = new ErrorLog(sheet.getSheetName(), i, "来电表更新出错：" + e.getMessage());
+                        errorLogList.add(errorLog);
+                    }
+                }
+                if(visitVisitTime.length()>0) {
+                    condition.clear();
+                    condition.put("blockFlag", false);
+                    condition.put("customerTel", customerTel);
+                    condition.put("visitTime", Integer.valueOf(visitVisitTime.replace("/", "")));
+                    condition.put("intentionalArea", visitIntentionalArea);
+                    condition.put("acceptPrice", visitAcceptPrice);
+                    condition.put("residentialZone", visitResidentialZone);
+                    condition.put("realtyPurpose", visitRealtyPurpose);
+                    condition.put("customerType", visitCustomerType);
+                    condition.put("realtyConsultant", visitRealtyConsultant);
+                    condition.put("dealTime", visitDealTime);
+                    condition.put("dealRoomnum", visitDealRoomnum);
+                    try {
+                        sqlSession.update("xiaolu.visit.summaryupdate", condition);
+                    } catch (Exception e) {
+                        ErrorLog errorLog = new ErrorLog(sheet.getSheetName(), i, "来访表更新出错：" + e.getMessage());
+                        errorLogList.add(errorLog);
+                    }
+                }
+                if(dealSubscriptionTime.length()>0) {
+                    condition.clear();
+                    condition.put("blockFlag", false);
+                    condition.put("customerTel", customerTel);
+                    condition.put("subscriptionTime", Integer.valueOf(dealSubscriptionTime.replace("/", "")));
+                    condition.put("accessKnown", dealAccessKnown);
+                    condition.put("referee", dealReferee);
+                    condition.put("refereeTel", dealRefereeTel);
+                    try {
+                        sqlSession.update("xiaolu.deal.summaryupdate", condition);
+                    } catch (Exception e) {
+                        ErrorLog errorLog = new ErrorLog(sheet.getSheetName(), i, "成交表更新出错：" + e.getMessage());
+                        errorLogList.add(errorLog);
+                    }
+                }
+            }else{
+                break;
+            }
+        }
+        result.setData(errorLogList);
+        return result;
+    }
+
     @Override
     public ResultData handleUnknown(Map<String, Object> condition) {
         ResultData result = new ResultData();

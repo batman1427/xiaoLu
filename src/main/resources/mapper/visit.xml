@@ -76,4 +76,34 @@
         </if>
         WHERE customer_tel = #{customerTel} AND visit_time = #{visitTime}
     </update>
+
+    <update id="summaryupdate" parameterType="java.util.Map">
+        UPDATE xiaolu_excel.excel_visit
+        SET
+        <if test="intentionalArea != null">
+            intentional_area = #{intentionalArea},
+        </if>
+        <if test="acceptPrice != null">
+            accept_price = #{acceptPrice},
+        </if>
+        <if test="residentialZone != null">
+            residential_zone = #{residentialZone},
+        </if>
+        <if test="realtyPurpose != null">
+            realty_purpose = #{realtyPurpose},
+        </if>
+        <if test="customerType != null">
+            customer_type = #{customerType},
+        </if>
+        <if test="realtyConsultant != null">
+            realty_consultant = #{realtyConsultant},
+        </if>
+        <if test="dealTime != null">
+            deal_time = #{dealTime},
+        </if>
+        <if test="dealRoomnum != null">
+            deal_roomnum = #{dealRoomnum}
+        </if>
+        WHERE  visit_time = #{visitTime} AND customer_tel = #{customerTel} AND block_flag = #{blockFlag}
+    </update>
 </mapper>

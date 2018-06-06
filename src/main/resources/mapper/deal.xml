@@ -129,4 +129,19 @@
         </if>
         WHERE customer_tel = #{customerTel} AND subscription_time = #{subscriptionTime}
     </update>
+
+    <update id="summaryupdate" parameterType="java.util.Map">
+        UPDATE xiaolu_excel.excel_deal
+        SET
+        <if test="accessKnown != null">
+            access_known = #{accessKnown},
+        </if>
+        <if test="referee != null">
+            referee = #{referee},
+        </if>
+        <if test="refereeTel != null">
+            referee_tel = #{refereeTel}
+        </if>
+        WHERE  subscription_time = #{subscriptionTime} AND customer_tel = #{customerTel} AND block_flag = #{blockFlag}
+    </update>
 </mapper>

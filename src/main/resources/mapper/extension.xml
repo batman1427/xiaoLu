@@ -66,4 +66,28 @@
         </if>
         WHERE customer_tel = #{customerTel} AND extension_time = #{extensionTime}
     </update>
+
+    <update id="summaryupdate" parameterType="java.util.Map">
+        UPDATE xiaolu_excel.excel_extension
+        SET
+        <if test="realtyConsultant != null">
+            realty_consultant = #{realtyConsultant},
+        </if>
+        <if test="visitTime != null">
+            visit_time = #{visitTime},
+        </if>
+        <if test="customerSituation != null">
+            customer_situation = #{customerSituation},
+        </if>
+        <if test="dealTime != null">
+            deal_time = #{dealTime},
+        </if>
+        <if test="dealBuilding != null">
+            deal_building = #{dealBuilding},
+        </if>
+        <if test="dealRoomnum != null">
+            deal_roomnum = #{dealRoomnum}
+        </if>
+        WHERE  extension_time = #{extensionTime} AND customer_tel = #{customerTel} AND block_flag = #{blockFlag}
+    </update>
 </mapper>

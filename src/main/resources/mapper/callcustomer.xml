@@ -72,4 +72,37 @@
         </if>
         WHERE customer_tel = #{customerTel} AND call_time = #{callTime}
     </update>
+
+    <update id="summaryupdate" parameterType="java.util.Map">
+        UPDATE xiaolu_excel.excel_callcustomer
+        SET
+        <if test="datasourceArea != null">
+            datasource_area = #{datasourceArea},
+        </if>
+        <if test="datasourceBuilding != null">
+            datasource_building = #{datasourceBuilding},
+        </if>
+        <if test="callSalesman != null">
+            call_salesman = #{callSalesman},
+        </if>
+        <if test="intentionLevel != null">
+            intention_level = #{intentionLevel},
+        </if>
+        <if test="intentionBuilding != null">
+            intention_building = #{intentionBuilding},
+        </if>
+        <if test="visitTime != null">
+            visit_time = #{visitTime},
+        </if>
+        <if test="visitBuilding != null">
+            visit_building = #{visitBuilding},
+        </if>
+        <if test="customerSituation != null">
+            customer_situation = #{customerSituation},
+        </if>
+        <if test="dealTime != null">
+            deal_time = #{dealTime}
+        </if>
+        WHERE  call_time = #{callTime} AND customer_tel = #{customerTel} AND block_flag = #{blockFlag}
+    </update>
 </mapper>

@@ -110,6 +110,9 @@ public class XiaoLuServiceImpl implements XiaoLuService {
             case "成交":
                 result = xiaoLuDao.createDeal(condition);
                 break;
+            case "综合":
+                result = xiaoLuDao.createSummary(condition);
+                break;
             default:
                 result = xiaoLuDao.handleUnknown(condition);
 
