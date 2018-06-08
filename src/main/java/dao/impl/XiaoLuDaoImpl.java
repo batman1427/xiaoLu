@@ -1242,4 +1242,32 @@ public class XiaoLuDaoImpl extends BaseDao implements XiaoLuDao{
         return result;
     }
 
+    @Override
+    public ResultData queryAdmin(Map<String, Object> condition) {
+        ResultData result = new ResultData();
+        try {
+            List<Admin> list = sqlSession.selectList("xiaolu.admin.query", condition);
+            if (list.isEmpty()) {
+                result.setResponseCode(ResponseCode.RESPONSE_NULL);
+            }
+            result.setData(list);
+        } catch (Exception e) {
+            result.setResponseCode(ResponseCode.RESPONSE_ERROR);
+            result.setDescription(e.getMessage());
+        }
+        return result;
+    }
+
+    @Override
+    public ResultData updateAdmin(Map<String, Object> condition) {
+        ResultData result = new ResultData();
+        try {
+            sqlSession.update("xiaolu.admin.update", condition);
+        } catch (Exception e) {
+            result.setResponseCode(ResponseCode.RESPONSE_ERROR);
+            result.setDescription(e.getMessage());
+        }
+        return result;
+    }
+
 }

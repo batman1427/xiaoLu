@@ -6,6 +6,7 @@ import auxiliary.ResultData;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import excel.XiaoluExcel;
+import form.AdminForm;
 import form.DateForm;
 import form.SummaryForm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -531,6 +532,42 @@ public class Controller {
             result.setDescription(response.getDescription());
             return result;
         }
+    }
+
+    /**
+     * This method is used to login.
+     * @return
+     */
+    @CrossOrigin
+    @RequestMapping("/login")
+    public ResultData login(AdminForm form) {
+        ResultData result = new ResultData();
+        String username = form.getUsername();
+        String password = form.getPassword();
+        Map<String, Object> condition = new HashMap<>();
+        condition.put("blockFlag", false);
+        condition.put("adminUsername", username);
+        condition.put("adminPassword", password);
+        ResultData response = xiaoLuService.fetchAdmin(condition);
+        result = this.setResponse(response);
+        return result;
+    }
+
+    /**
+     * This method is used to check token.
+     * @return
+     */
+    @CrossOrigin
+    @RequestMapping("/check")
+    public ResultData check(AdminForm form) {
+        ResultData result = new ResultData();
+        String token = form.getToken();
+        Map<String, Object> condition = new HashMap<>();
+        condition.put("blockFlag", false);
+        condition.put("adminToken", token);
+        ResultData response = xiaoLuService.fetchAdmin(condition);
+        result = this.setResponse(response);
+        return result;
     }
 
 }

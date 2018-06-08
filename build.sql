@@ -221,6 +221,15 @@ CREATE TABLE IF NOT EXISTS `xiaolu_excel`.`excel_tel` (
 )
   ENGINE = InnoDB;
 
+CREATE TABLE IF NOT EXISTS `xiaolu_excel`.`excel_admin` (
+  `admin_username` VARCHAR(40) NOT NULL,
+  `admin_password` VARCHAR(40) NOT NULl,
+  `admin_token` VARCHAR(40),
+  `block_flag`   TINYINT(1)  NOT NULL,
+  PRIMARY KEY (`admin_username`)
+)
+  ENGINE = InnoDB;
+
 SET SQL_MODE = @OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS = @OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS = @OLD_UNIQUE_CHECKS;

@@ -47,4 +47,8 @@ public interface XiaoLuDao {
     ResultData querySummary(Map<String, Object> condition);
 
     ResultData createSummary(Map<String , Object> condition);
+
+    ResultData queryAdmin(Map<String, Object> condition);
+
+    ResultData updateAdmin(Map<String , Object> condition);
 }

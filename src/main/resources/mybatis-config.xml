@@ -11,5 +11,6 @@
         <mapper resource="mapper/visit.xml" />
         <mapper resource="mapper/deal.xml" />
         <mapper resource="mapper/tel.xml" />
+        <mapper resource="mapper/admin.xml" />
     </mappers>
 </configuration>
